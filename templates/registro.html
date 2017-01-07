@@ -5,7 +5,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <form class="form-horizontal">
+    <form class="form-horizontal" action = "{{ url_for('form') }}" method = "POST">
       <fieldset>
 
 <!-- Dados do aluno -->
@@ -81,7 +81,7 @@
         <div class="form-group row">
           <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
           <div class="col-md-5">
-            <input class="form-control" type="date"  id="conclusao">
+            <input class="form-control" name="datagrad" type="date"  id="conclusao">
           </div>
         </div>
 
@@ -89,7 +89,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Onde se graduou:</label>
         <div class="col-md-5">
-          <input id="localgrad" name="" type="text"  class="form-control input-md" required="">
+          <input id="localgrad" name="localgrad" type="text"  class="form-control input-md" required="">
         </div>
       </div>
 
@@ -97,12 +97,19 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Orientador:</label>
         <div class="col-md-5">
-          <input id="orientador" name="" type="text"  class="form-control input-md" required="">
+          <input id="orientador" name="orientador" type="text"  class="form-control input-md" required="">
+        </div>
+      </div>
+<!--Coorientadores-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Coorientadores:</label>
+        <div class="col-md-5">
+          <input id="coorientadores" name="coorientadores" type="text"  class="form-control input-md" required="">
         </div>
       </div>
 
       <center>
-        <button type="button" class="btn btn-primary btn-lg">Cadastrar</button>
+        <input type="submit"></input>
       </center>
     </fieldset>
   </form>

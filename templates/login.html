@@ -65,12 +65,18 @@
                   <div class="controls">
                     <button class="btn btn-success">Login</button>
                     <br><br>Esqueceu sua senha? Clique <a href="#">aqui</a>
-                    <br><br><br>
+                    <br>
+                    {% if erro %}
+                    <div class="alert alert-danger">
+                      <strong>ERRO:</strong> {{ erro }}</div>
+                    {% endif %}<br><br>
+
                   </div>
                 </div>
               </center>
             </fieldset>
           </form>
+
         </div>
       </div>
     </div>
