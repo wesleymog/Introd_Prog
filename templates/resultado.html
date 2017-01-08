@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
    <body>
-
-      result of addition : {{ msg }}
-      <h2><a href = "\">go back to home page</a></h2>
-
+     <div class="alert alert-danger">
+       {{ msg }}
+    </div>
+      <h2><a href = "{{ url_for('registro') }}">Insira mais um registro</a></h2>
    </body>
 </html>

@@ -1,15 +1,53 @@
 import sqlite3
 
+# conectando...
 conn = sqlite3.connect('Sistema.db')
-print "Opened database successfully"
+# definindo um cursor
+cursor = conn.cursor()
 
-conn.execute('CREATE TABLE InfoBasica (id INTEGER AUTO_INCREMENT,nome VARCHAR, endereco VARCHAR, tel INTEGER, email VARCHAR)')
-print "Table created successfully"
+# criando a tabela (schema)
+cursor.execute("""
+CREATE TABLE InfoBasica (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome VARCHAR,
+        endereco VARCHAR,
+        tel INTEGER,
+        email VARCHAR
+);
+""")
 
-conn.execute('CREATE TABLE Professor (id INTEGER AUTO_INCREMENT,SIAPE INTEGER,Tipo VARCHAR, CodOrientados VARCHAR)')
-print "Table created successfully"
+print('Tabela criada com sucesso.')
 
-conn.execute('CREATE TABLE Aluno (id INTEGER AUTO_INCREMENT, DRE INTEGER, DataGrad VARCHAR,LocalGrad VARCHAR, Mestrado VARCHAR, Orientador VARCHAR,Corientadores VARCHAR, Ingresso VARCHAR,Qualificacao VARCHAR, CodDisc INTEGER, Bolsa VARCHAR, Ativo BOOLEAN, Paper VARCHAR)')
-print "Table created successfully"
+cursor.execute("""
+CREATE TABLE Aluno (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        DRE INTEGER,
+        DataGrad VARCHAR,
+        LocalGrad VARCHAR,
+        Mestrado VARCHAR,
+        Orientador VARCHAR,
+        Corientadores VARCHAR,
+        Ingresso VARCHAR,
+        Qualificacao VARCHAR,
+        CodDisc INTEGER,
+        Bolsa VARCHAR,
+        Ativo BOOLEAN,
+        Paper VARCHAR
+);
+""")
 
+print('Tabela criada com sucesso.')
+
+cursor.execute("""
+CREATE TABLE Professor (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        SIAPE INTEGER,
+        Tipo VARCHAR,
+        CodOrientados VARCHAR
+        );
+""")
+
+print('Tabela criada com sucesso.')
+
+# desconectando...
 conn.close()

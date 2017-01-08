@@ -1,7 +1,11 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, Response
+import sqlite3
 
 app = Flask(__name__)
 msg=''
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     erro = None
@@ -22,7 +26,7 @@ def form():
          nome = request.form['nome']
          dre = request.form['dre']
          curso = request.form['curso']
-         telefone = request.form['telefone']
+         tel = request.form['telefone']
          email=request.form['email']
          endereco=request.form['endereco']
          bairro=request.form['bairro']
@@ -32,21 +36,25 @@ def form():
          orientador=request.form['orientador']
          coorientadores=request.form['coorientadores']
          endereco=endereco+", "+bairro+", "+cidade
-         with sql.connect("Sistema.db") as con:
-            print 'Estou aqui'
-            cur = con.cursor()
-            cur.execute("INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores) VALUES (?,?,?,?,?)",(dre,datagrad,localgrad,Orientador,coorientadores) )
-            cur.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
-            print 'Estou aqui"
+         conn = sqlite3.connect('Sistema.db')
+         print 'oi'
+         cursor = conn.cursor()
+         print 'aqiu'
+         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores)
+         VALUES (?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores) )
+         print "ja foi uma"
+         cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
+         print 'esperA'
+         conn.commit()
 
-            con.commit()
-            print 'Estou aqui'
-            msg = "Record successfully added"
+         print('Dados inseridos com sucesso.')
+
+         conn.close()
+         print 'deu bom'
+         msg = "Adicionado com sucesso!"
       except:
-         print 'eis'
          con.rollback()
-         msg = "error in insert operation"
-
+         msg="Tem algo de errado"
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
