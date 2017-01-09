@@ -5,7 +5,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <form class="form-horizontal" action = "{{ url_for('form') }}" method = "POST">
+    <form class="form-horizontal" action = "{{ url_for('formAlunos') }}" method = "POST">
       <fieldset>
 
 <!-- Dados do aluno -->
@@ -23,7 +23,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="dre">DRE:</label>
           <div class="col-md-5">
-            <input id="dre" name="dre" type="text"  class="form-control input-md" required="">
+            <input id="dre" name="dre" type="number"  class="form-control input-md" required="">
           </div>
         </div>
 
@@ -84,7 +84,15 @@
             <input class="form-control" name="datagrad" type="date"  id="conclusao">
           </div>
         </div>
+<!-- Formulario da graduação -->
+    <center><legend>Ingresso</legend></center>
 
+        <div class="form-group row">
+          <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
+          <div class="col-md-5">
+            <input class="form-control" name="ingresso" type="date"  id="ingresso">
+          </div>
+        </div>
 <!--Onde se graduou-->
       <div class="form-group">
         <label class="col-md-4 control-label">Onde se graduou:</label>
@@ -107,6 +115,14 @@
           <input id="coorientadores" name="coorientadores" type="text"  class="form-control input-md" required="">
         </div>
       </div>
+
+<!-- CodDisc-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="coddisc">Curso:</label>
+          <div class="col-md-5">
+            <input id="curso" name="coddisc" type="text"  class="form-control input-md" required="">
+          </div>
+        </div>
 
       <center>
         <input type="submit"></input>

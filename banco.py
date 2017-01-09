@@ -27,7 +27,7 @@ CREATE TABLE Aluno (
         Mestrado VARCHAR,
         Orientador VARCHAR,
         Corientadores VARCHAR,
-        Ingresso VARCHAR,
+        Ingresso date,
         Qualificacao VARCHAR,
         CodDisc INTEGER,
         Bolsa VARCHAR,

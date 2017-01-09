@@ -3,9 +3,6 @@ import sqlite3
 
 app = Flask(__name__)
 msg=''
-login_manager = LoginManager()
-login_manager.init_app(app)
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     erro = None
@@ -18,11 +15,12 @@ def login():
 @app.route("/registro")
 def registro():
     return render_template("registro.html")
-@app.route('/form',methods = ['POST', 'GET'])
-def form():
+@app.route('/formAlunos',methods = ['POST', 'GET'])
+def formAlunos():
+   msg=''
    if request.method == 'POST':
       try:
-         print 'Eis me aqui'
+
          nome = request.form['nome']
          dre = request.form['dre']
          curso = request.form['curso']
@@ -36,21 +34,21 @@ def form():
          orientador=request.form['orientador']
          coorientadores=request.form['coorientadores']
          endereco=endereco+", "+bairro+", "+cidade
+         ingresso=request.form['ingresso']
+         coddisc=request.form['coddisc']
+         data=ingresso.split("-")
+         datafinal=data[0]+data[1]+data[2]
+
          conn = sqlite3.connect('Sistema.db')
-         print 'oi'
          cursor = conn.cursor()
-         print 'aqiu'
-         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores)
-         VALUES (?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores) )
-         print "ja foi uma"
+         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc)
+         VALUES (?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc) )
          cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
-         print 'esperA'
          conn.commit()
 
          print('Dados inseridos com sucesso.')
 
          conn.close()
-         print 'deu bom'
          msg = "Adicionado com sucesso!"
       except:
          con.rollback()
