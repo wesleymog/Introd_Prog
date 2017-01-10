@@ -15,6 +15,10 @@ def login():
 @app.route("/registro")
 def registro():
     return render_template("registro.html")
+@app.route("/registroDisc")
+def registroDisc():
+
+    return render_template("registroDisc")
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
    msg=''
