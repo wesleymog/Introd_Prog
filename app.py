@@ -17,8 +17,10 @@ def registro():
     return render_template("registro.html")
 @app.route("/registroDisc")
 def registroDisc():
-
     return render_template("registroDisc")
+@app.route("/lista")
+def lista():
+    return render_template("tabela_de_edicao.html")
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
    msg=''
@@ -60,7 +62,7 @@ def formAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
-         
+
 @app.route('/formProfessores',methods = ['POST', 'GET'])
 def formProfessores():
    msg=''
@@ -73,7 +75,7 @@ def formProfessores():
          cidade=request.form['cidade']
          endereco=endereco+", "+bairro+", "+cidade
          tipoprof=tipoprof.form["tipoprof"]
-         
+
 
 
          conn = sqlite3.connect('Sistema.db')
