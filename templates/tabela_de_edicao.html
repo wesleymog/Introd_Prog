@@ -1,60 +1,64 @@
 <html>
   <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
 
-  <title>Login</title>
+    <title>Login</title>
 
-  <style>
-  .bg-4 {
-  background-color: #2f2f2f;
-  color: #ffffff;
-  }
-  .container-fluid {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  }
-  .navbar {
-  height: 70px;
-  }
-
-
-
-  table {
- font: 1.5em tahoma;
- border:1px solid #dadada;
- width:50%;margin:auto;
- border:1px solid #dadada;
-}
-table thead tr {
- text-align:left;
- background:#fff;
-}
-table thead th {
- background:gray;
-}
-table tbody tr {
- cursor: pointer;
- background:#eee;
-}
+        <style>
+          .bg-4 {
+          background-color: #2f2f2f;
+          color: #ffffff;
+          }
+          .container-fluid {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          }
+          .navbar {
+          height: 70px;
+          }
 
 
-<style>
-	table, td, th {
-    		border: 2px solid black;
 
-	}
-	td {
-    		height: px;
-        text-align: center;
-	}
-	table {
-    		border-collapse: collapse;
-    		width: 100%;
-	}
-	</style>
+          /*table {
+         font: 1.5em tahoma;
+         border:1px solid #dadada;
+         width:50%;margin:auto;
+         border:1px solid #dadada;
+        }
+        table thead tr {
+         text-align:left;
+         background:#fff;
+        }
+        table thead th {
+         background:gray;
+        }
+        table tbody tr {
+         cursor: pointer;
+         background:#eee;
+        }
 
-  </style>
+
+        	table, td, th {
+            		border: 2px solid black;
+
+        	}
+        	td {
+            		height: px;
+                text-align: center;
+        	}
+        	table {
+            		border-collapse: collapse;
+            		width: 100%;
+        	}
+          TH {background-color:black;
+              color:#FFD700;
+              style='text-align:center
+              }
+          .cinza {background-color:#C0C0C0;}
+          a {color:#FFD700;}
+          table {background-color:#FFFAF0}*/
+        </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -76,20 +80,10 @@ table tbody tr {
         <div class="span12">
           <form class="form-horizontal" action='' method="POST">
             <fieldset>
-             <html>
-
-<style>
-TH {background-color:black;
-    color:#FFD700;
-    style='text-align:center
-    }
-.cinza {background-color:#C0C0C0;}
-a {color:#FFD700;}
-table {background-color:#FFFAF0}
-</style>
-<a href=#><h4>Incluir registro</h4></a>
-<table border="0px" cellpadding="5px" cellspacing="0">
-<TR> <! Cria a primeira linha da tabela>
+<a href="{{url_for('registro')}}"><h4>Incluir registro</h4></a>
+<div class="table-responsive">
+<table class="table">
+<TR>
 <TH>Codigo</TH>
 <TH>Nome</TH>
 <TH>Email </TH>
@@ -97,73 +91,21 @@ table {background-color:#FFFAF0}
 <TH>DRE</TH>
 <TH>Deletar?</TH>
 </TR>
+{% for row in rows %}
 <TR class="cinza">
-<TD><a href="">Edit</a> 1</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
+
+
+<TD><a href="">Edit</a> {{row['id']}}</TD>
+<TD> {{row['nome']}}</TD>
+<TD>{{row['email']}}</TD>
+<TD>{{row['tel']}}</TD>
+<TD>{{row['dre']}}</TD>
 <TD><a href="">Deletar</a> </TD>
-<TR>
-<TR>
-<TD><a href="">Edit</a> 2</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="">Deletar</a> </TD>
-<TR>
-<TR class="cinza">
-<TD><a href="">Edit</a> 3</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="">Deletar</a> </TD>
-<TR>
-<TR>
-<TD><a href="">Edit</a> 4</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="">Deletar</a> </TD>
-<TR>
-<TR class="cinza">
-<TD><a href="">Edit</a> 5</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="">Deletar</a> </TD>
-<TR>
-<TR>
-<TD><a href="">Edit</a> 6</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="#">Deletar</a> </TD>
-<TR>
-<TR class="cinza">
-<TD><a href="">Edit</a> 7</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href=#>Deletar</a> </TD>
-<TR>
-<TR>
-<TD><a href="">Edit</a> 8</TD>
-<TD> Buda</TD>
-<TD>buda@gmail.com </TD>
-<TD>(00)99999-9999 </TD>
-<TD>999999999</TD>
-<TD><a href="http:google.com">Deletar</a> </TD>
-<TR>
+</TR>
+{% endfor %}
 </TABLE>
 
-
+</div>
                     <br><br><br>
                   </div>
                 </div>
@@ -176,9 +118,9 @@ table {background-color:#FFFAF0}
 
     <div class="container-fluid bg-4 text-center">
       <div class="row">
-        <div class="col-md-4"><h3>Endere�o</h3>
-          <p>Av. Pedro Calmon. n� 550 - Pr�dio da Reitoria, 2� andar
-            <br> Cidade Universit�ria - Rio de Janeiro, RJ
+        <div class="col-md-4"><h3>Endereço</h3>
+          <p>Av. Pedro Calmon. nº 550 - Prédio da Reitoria, 2° andar
+            <br> Cidade Universitária - Rio de Janeiro, RJ
             <br>CEP: 21941-901
             <br><br>Universidade Federal do Rio de Janeiro/UFRJ</p>
           </div>
@@ -192,7 +134,7 @@ table {background-color:#FFFAF0}
             <p>
               Telefone: +55 (21) 3938-9600 | Fax: +55 (21) 3938-1605
               <br><br>
-              <br>Acesso � Gradua��o da UFRJ:
+              <br>Acesso à Graduação da UFRJ:
               <br> Tel: (21) 3938-9430 | E-mail: acessograduacao@ufrj.br
             </p>
           </div>

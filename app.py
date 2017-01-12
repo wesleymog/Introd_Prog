@@ -20,7 +20,13 @@ def registroDisc():
     return render_template("registroDisc")
 @app.route("/lista")
 def lista():
-    return render_template("tabela_de_edicao.html")
+   conn = sqlite3.connect('Sistema.db')
+   conn.row_factory = sqlite3.Row
+   cur = conn.cursor()
+   cur.execute("Select * from Aluno, InfoBasica where Aluno.id=InfoBasica.id;")
+
+   rows = cur.fetchall();
+   return render_template("tabela_de_edicao.html", rows=rows)
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
    msg=''
