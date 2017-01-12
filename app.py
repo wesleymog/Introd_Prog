@@ -68,7 +68,19 @@ def formAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
-
+@app.route("/deletar/<nid>")
+def delete(nid):
+    print nid
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""DELETE FROM Aluno WHERE id=?;""",(nid) )
+    cursor.execute("""DELETE FROM InfoBasica WHERE id=?;""",(nid) )
+    conn.commit()
+    conn.close()
+    return render_template("resultado.html")
+@app.route('/cadastroprof')
+def cadastroprof():
+    return render_template('cadastroprof.html')
 @app.route('/formProfessores',methods = ['POST', 'GET'])
 def formProfessores():
    msg=''
@@ -81,9 +93,6 @@ def formProfessores():
          cidade=request.form['cidade']
          endereco=endereco+", "+bairro+", "+cidade
          tipoprof=tipoprof.form["tipoprof"]
-
-
-
          conn = sqlite3.connect('Sistema.db')
          cursor = conn.cursor()
          ##colocar execute
@@ -97,6 +106,7 @@ def formProfessores():
          con.rollback()
          msg="ERRO"
       finally:
-         return render_template("cadastroprof.html",msg = msg)
+         return render_template("resultado.html",msg = msg)
          con.close()
+app.debug = True
 app.run()

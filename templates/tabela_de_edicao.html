@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
 
-    <title>Login</title>
+    <title>Lista</title>
 
         <style>
           .bg-4 {
@@ -89,18 +89,40 @@
 <TH>Email </TH>
 <TH>Telefone </TH>
 <TH>DRE</TH>
+<TH>DataGrad</TH>
+<TH>LocalGrad</TH>
+<TH>Mestrado</TH>
+<TH>Orientador</TH>
+<TH>Corientadores</TH>
+<TH>Ingresso</TH>
+<TH>Qualificacao</TH>
+<TH>CodDisc</TH>
+<TH>Bolsa</TH>
+<TH>Ativo</TH>
+<TH>Paper</TH>
 <TH>Deletar?</TH>
 </TR>
 {% for row in rows %}
 <TR class="cinza">
 
 
-<TD><a href="">Edit</a> {{row['id']}}</TD>
+<TD><a href="/edit/{{row['id']}}">Edit</a> {{row['id']}}</TD>
 <TD> {{row['nome']}}</TD>
 <TD>{{row['email']}}</TD>
 <TD>{{row['tel']}}</TD>
 <TD>{{row['dre']}}</TD>
-<TD><a href="">Deletar</a> </TD>
+<TD>{{row['DataGrad']}}</TD>
+<TD>{{row['LocalGrad']}}</TD>
+<TD>{{row['Mestrado']}}</TD>
+<TD>{{row['Orientador']}}</TD>
+<TD>{{row['Corientadores']}}</TD>
+<TD>{{row['Ingresso']}}</TD>
+<TD>{{row['Qualificacao']}}</TD>
+<TD>{{row['CodDisc']}}</TD>
+<TD>{{row['Bolsa']}}</TD>
+<TD>{{row['Ativo']}}</TD>
+<TD>{{row['Paper']}}</TD>
+<TD><a href="/deletar/{{row['id']}}">Deletar</a> </TD>
 </TR>
 {% endfor %}
 </TABLE>
