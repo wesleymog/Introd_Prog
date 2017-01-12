@@ -60,4 +60,35 @@ def formAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
+         
+@app.route('/formProfessores',methods = ['POST', 'GET'])
+def formProfessores():
+   msg=''
+   if request.method == 'POST':
+      try:
+
+         nome = request.form['nome']
+         endereco=request.form['endereco']
+         bairro=request.form['bairro']
+         cidade=request.form['cidade']
+         endereco=endereco+", "+bairro+", "+cidade
+         tipoprof=tipoprof.form["tipoprof"]
+         
+
+
+         conn = sqlite3.connect('Sistema.db')
+         cursor = conn.cursor()
+         ##colocar execute
+         conn.commit()
+
+         print('Dados inseridos com sucesso.')
+
+         conn.close()
+         msg = "Adicionado com sucesso!"
+      except:
+         con.rollback()
+         msg="ERRO"
+      finally:
+         return render_template("cadastroprof.html",msg = msg)
+         con.close()
 app.run()
