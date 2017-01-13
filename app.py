@@ -1,3 +1,4 @@
+#coding:utf-8
 from flask import Flask, render_template, redirect, url_for, request, Response
 import sqlite3
 
@@ -23,7 +24,7 @@ def lista():
    conn = sqlite3.connect('Sistema.db')
    conn.row_factory = sqlite3.Row
    cur = conn.cursor()
-   cur.execute("Select * from Aluno, InfoBasica where Aluno.id=InfoBasica.id;")
+   cur.execute("Select * from Aluno, InfoBasica where Aluno.IDGERAL=InfoBasica.id;")
 
    rows = cur.fetchall();
    return render_template("tabela_de_edicao.html", rows=rows)
@@ -50,12 +51,25 @@ def formAlunos():
          coddisc=request.form['coddisc']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
-
+         print 'oi'
          conn = sqlite3.connect('Sistema.db')
+         print 'oi'
          cursor = conn.cursor()
-         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc)
-         VALUES (?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc) )
+         print 'oi'
          cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
+         print 'oi'
+         conn.row_factory = sqlite3.Row
+         print 'oi'
+         cursor.execute("Select Max(id) from InfoBasica")
+         print 'oi'
+         rows = cursor.fetchall();
+         print 'oi'
+         for row in rows:
+             numero=row
+         numeros=numero[0]
+         print numeros
+         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, IDGERAL)
+         VALUES (?,?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,numeros) )
          conn.commit()
 
          print('Dados inseridos com sucesso.')
@@ -68,6 +82,8 @@ def formAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
+
+#Rotas de deleção
 @app.route("/deletar/<nid>")
 def delete(nid):
     print nid
@@ -78,9 +94,11 @@ def delete(nid):
     conn.commit()
     conn.close()
     return render_template("resultado.html")
+#Parte visual do cadastro dos professores
 @app.route('/cadastroprof')
 def cadastroprof():
     return render_template('cadastroprof.html')
+#Parte Lógica do cadastro dos professores
 @app.route('/formProfessores',methods = ['POST', 'GET'])
 def formProfessores():
    msg=''

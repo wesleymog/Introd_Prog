@@ -13,6 +13,7 @@ CREATE TABLE InfoBasica (
         endereco VARCHAR,
         tel INTEGER,
         email VARCHAR
+
 );
 """)
 
@@ -32,7 +33,9 @@ CREATE TABLE Aluno (
         CodDisc INTEGER,
         Bolsa VARCHAR,
         Ativo BOOLEAN,
-        Paper VARCHAR
+        Paper VARCHAR,
+        IDGERAL INTEGER,
+        FOREIGN KEY(IDGERAL) REFERENCES InfoBasica(id)
 );
 """)
 
@@ -41,9 +44,11 @@ print('Tabela criada com sucesso.')
 cursor.execute("""
 CREATE TABLE Professor (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        IDGERAL INTEGER,
         SIAPE INTEGER,
         Tipo VARCHAR,
-        CodOrientados VARCHAR
+        CodOrientados VARCHAR,
+        FOREIGN KEY(IDGERAL) REFERENCES InfoBasica(id)
         );
 """)
 
