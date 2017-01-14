@@ -1,5 +1,5 @@
-<html>
-<head>
+{% extends "layout.html" %}
+{% block head %}
   <style>
 .bg-4 {
     background-color: #2f2f2f;
@@ -28,9 +28,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Quem </title>
- </head>
+ {% endblock %}
 
- <body>
+ {% block body %}
  <nav class="navbar navbar-default">
    <div class="navbar-header">
 <img alt="Brand" src="https://s29.postimg.org/6tkc583k7/UFRJ.png" width="180px">
@@ -82,5 +82,4 @@ Universidade Federal do Rio de Janeiro/UFRJ</p></div>
     <div class="col-md-4"><img src="http://www.residenciamedica.com.br/wp-content/uploads/2014/10/ufrj.png" width="200px"></div>
   </div>
 
-</body>
-</html>
+{% endblock %}
