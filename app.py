@@ -4,6 +4,7 @@ import sqlite3
 
 app = Flask(__name__)
 msg=''
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     erro = None
@@ -13,9 +14,15 @@ def login():
         else:
             return redirect(url_for('registro'))
     return render_template('login.html', erro=erro)
+
 @app.route("/registro")
 def registro():
     return render_template("registro.html")
+
+@app.route("/registroProf")
+def registroProf():
+    return render_template("registroProf.html")
+
 @app.route("/registroDisc")
 def registroDisc():
     return render_template("registroDisc")
@@ -27,6 +34,7 @@ def ativos():
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and Ativo=1;""" )
     rows = cursor.fetchall();
     return render_template("Ativo.html", rows=rows)
+
 @app.route("/lista")
 def lista():
    conn = sqlite3.connect('Sistema.db')
@@ -36,6 +44,7 @@ def lista():
 
    rows = cur.fetchall();
    return render_template("tabela_de_edicao.html", rows=rows)
+
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
    msg=''
@@ -80,6 +89,52 @@ def formAlunos():
              ativo=False
          cursor.execute("""INSERT INTO Aluno (DRE,Curso, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, Ativo,IDGERAL)
          VALUES (?,?,?,?,?,?,?,?,?,?)""",(dre,curso,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,ativo,numeros) )
+
+         conn.commit()
+
+         print('Dados inseridos com sucesso.')
+
+         conn.close()
+         msg = "Adicionado com sucesso!"
+      except:
+         con.rollback()
+         msg="Tem algo de errado"
+      finally:
+         return render_template("resultado.html",msg = msg)
+         con.close()
+
+@app.route('/formProfessores',methods = ['POST', 'GET'])
+def formProfessores():
+   msg=''
+   if request.method == 'POST':
+      try:
+
+         nome = request.form['nome']
+         tel = request.form['telefone']
+         email=request.form['email']
+         endereco=request.form['endereco']
+         bairro=request.form['bairro']
+         cidade=request.form['cidade']
+         SIAPE=request.form['siape']
+         tipo=request.form['tipoprof']
+         dreAluno=request.form['dre']
+         endereco=endereco+", "+bairro+", "+cidade
+
+         conn = sqlite3.connect('Sistema.db')
+         cursor = conn.cursor()
+
+         cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
+
+         conn.row_factory = sqlite3.Row
+
+         cursor.execute("Select Max(id) from InfoBasica")
+
+         rows = cursor.fetchall();
+         for row in rows:
+             numero=row
+         numeros=numero[0]
+         cursor.execute("""INSERT INTO Professor (IDGERAL, SIAPE, Tipo, CodOrientados)
+         VALUES (?,?,?,?)""",(numeros,SIAPE,tipo,dreAluno) )
 
          conn.commit()
 
@@ -176,9 +231,11 @@ def EditAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
-@app.route('/index')
+
+@app.route('/')
 def index():
     return render_template('index.html')
+
 @app.route('/Sobre')
 def sobre():
     return render_template('Sobre.html')

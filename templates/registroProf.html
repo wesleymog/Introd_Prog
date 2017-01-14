@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -71,7 +72,11 @@
       <div class="form-group">
           <label class="col-md-4 control-label" for="tipoprof">Tipo de professor:</label>
           <div class="col-md-5">
-            <input id="tipoprof" name="tipoprof" type="text"  class="form-control input-md" required="">
+            <select name="tipoprof" id="tipoprof" class="form-control" required>
+              <option value="Aspirante">Aspirante</option>
+              <option value="Permanente">Permanente</option>
+              <option value="Permanente-Doutorado">Permanente-Doutorado</option>
+            </select>
           </div>
         </div>
 
@@ -79,11 +84,11 @@
 
 <!-- DRE do aluno-->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="dre">DRE:</label>
+          <label class="col-md-4 control-label" for="dre">DRE dos Orientados:</label>
           <div class="col-md-5">
-            <input id="dre" name="dre" type="number"  class="form-control input-md" required="">
+            <input id="dre" name="dre" type="number"  class="form-control input-md" required>
           </div>
-	
+
         </div>
       <center>
         <input type="submit"></input>
