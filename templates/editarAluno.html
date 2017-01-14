@@ -13,6 +13,7 @@
 
 <!-- Dados do aluno -->
       <center><legend>Registro do Aluno</legend></center>
+{{rows}}
 
     {% for row in rows %}
 
@@ -36,7 +37,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="curso">Curso:</label>
           <div class="col-md-5">
-            <input id="curso" name="curso" type="text"  value="{{row['curso']}}"class="form-control input-md" required="">
+            <input id="curso" name="curso" type="text"  value="{{row[9]}}"class="form-control input-md" required="">
           </div>
         </div>
 
@@ -94,14 +95,14 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Orientador:</label>
         <div class="col-md-5">
-          <input id="orientador" name="orientador" type="text"  value="{{row[10]}}"class="form-control input-md" required="">
+          <input id="orientador" name="orientador" type="text"  value="{{row[11]}}"class="form-control input-md" required="">
         </div>
       </div>
 <!--Coorientadores-->
       <div class="form-group">
         <label class="col-md-4 control-label">Coorientadores:</label>
         <div class="col-md-5">
-          <input id="coorientadores" name="coorientadores" value="{{row[11]}}"type="text"  class="form-control input-md" required="">
+          <input id="coorientadores" name="coorientadores" value="{{row[12]}}"type="text"  class="form-control input-md" required="">
         </div>
       </div>
 
@@ -110,7 +111,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
           <div class="col-md-5">
-            <input id="curso" name="coddisc" type="text"   value="{{row[14]}}"class="form-control input-md" required="">
+            <input id="curso" name="coddisc" type="text"   value="{{row[15]}}"class="form-control input-md" required="">
           </div>
         </div>
         <input id="id" name="id" type="text"   value="{{row[0]}}"class="escondido" required="">

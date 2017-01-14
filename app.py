@@ -19,6 +19,14 @@ def registro():
 @app.route("/registroDisc")
 def registroDisc():
     return render_template("registroDisc")
+
+@app.route('/ativos')
+def ativos():
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and Ativo=1;""" )
+    rows = cursor.fetchall();
+    return render_template("Ativo.html", rows=rows)
 @app.route("/lista")
 def lista():
    conn = sqlite3.connect('Sistema.db')
@@ -49,6 +57,7 @@ def formAlunos():
          endereco=endereco+", "+bairro+", "+cidade
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
+         ativo=request.form['ativo']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
 
@@ -62,14 +71,15 @@ def formAlunos():
          cursor.execute("Select Max(id) from InfoBasica")
 
          rows = cursor.fetchall();
-
          for row in rows:
              numero=row
          numeros=numero[0]
-         print numeros
-
-         cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, IDGERAL)
-         VALUES (?,?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,numeros) )
+         if ativo=='Sim':
+             ativo=True
+         elif ativo=='Não':
+             ativo=False
+         cursor.execute("""INSERT INTO Aluno (DRE,Curso, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, Ativo,IDGERAL)
+         VALUES (?,?,?,?,?,?,?,?,?,?)""",(dre,curso,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,ativo,numeros) )
 
          conn.commit()
 
@@ -105,7 +115,7 @@ def editar(nid):
     rows = cursor.fetchall();
     print rows
     for row in rows:
-        inte=str(row[12])
+        inte=str(row[13])
         o=0
         ano=''
         mes=''
@@ -139,9 +149,11 @@ def EditAlunos():
          coorientadores=request.form['coorientadores']
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
+         ativo=request.form['ativo']
          nid=request.form['id']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
+
          conn = sqlite3.connect('Sistema.db')
          cursor = conn.cursor()
          cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
@@ -149,7 +161,8 @@ def EditAlunos():
 
          print 'olha a treta'
          cursor.execute("""UPDATE Aluno SET DRE=?, DataGrad=?,
-         LocalGrad=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=? WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,nid) )
+         LocalGrad=?,Curso=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=?
+         WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,curso,orientador,coorientadores,datafinal,coddisc,nid) )
          print 'melhor'
          conn.commit()
 
@@ -170,36 +183,6 @@ def index():
 def sobre():
     return render_template('Sobre.html')
 #Parte visual do cadastro dos professores
-@app.route('/cadastroprof')
-def cadastroprof():
-    return render_template('cadastroprof.html')
-#Parte Lógica do cadastro dos professores
-@app.route('/formProfessores',methods = ['POST', 'GET'])
-def formProfessores():
-   msg=''
-   if request.method == 'POST':
-      try:
 
-         nome = request.form['nome']
-         endereco=request.form['endereco']
-         bairro=request.form['bairro']
-         cidade=request.form['cidade']
-         endereco=endereco+", "+bairro+", "+cidade
-         tipoprof=tipoprof.form["tipoprof"]
-         conn = sqlite3.connect('Sistema.db')
-         cursor = conn.cursor()
-         ##colocar execute
-         conn.commit()
-
-         print('Dados inseridos com sucesso.')
-
-         conn.close()
-         msg = "Adicionado com sucesso!"
-      except:
-         con.rollback()
-         msg="ERRO"
-      finally:
-         return render_template("resultado.html",msg = msg)
-         con.close()
 app.debug = True
 app.run()

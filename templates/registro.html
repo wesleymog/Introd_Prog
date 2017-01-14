@@ -47,7 +47,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="email">Email:</label>
           <div class="col-md-5">
-            <input id="email" name="email" type="text"  class="form-control input-md" required="">
+            <input id="email" name="email" type="email"  class="form-control input-md" required="">
           </div>
         </div>
 
@@ -86,12 +86,13 @@
         </div>
 <!-- Formulario da graduação -->
 <!--Onde se graduou-->
-<div class="form-group">
-  <label class="col-md-4 control-label">Onde se graduou:</label>
-  <div class="col-md-5">
-    <input id="localgrad" name="localgrad" type="text"  class="form-control input-md" required="">
-  </div>
-</div>
+        <div class="form-group">
+          <label class="col-md-4 control-label">Onde se graduou:</label>
+          <div class="col-md-5">
+            <input id="localgrad" name="localgrad" type="text"  class="form-control input-md" required="">
+          </div>
+        </div>
+
     <center><legend>Ingresso</legend></center>
 
         <div class="form-group row">
@@ -100,6 +101,27 @@
             <input class="form-control" name="ingresso" type="date"  id="ingresso">
           </div>
         </div>
+
+        <!-- Formulario da graduação -->
+            <center><legend>Qualificação</legend></center>
+
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
+                  <div class="col-md-5">
+                    <select name="VQualificacao" class="form-control">
+                      <option value="Sim">Sim</option>
+                      <option value="Não">Não</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="conclusao" class="col-md-4 control-label">Data da qualificação:</label>
+                  <div class="col-md-5">
+                    <input class="form-control" name="dataquali" type="date"  id="conclusao">
+                  </div>
+                </div>
+        <!-- Formulario da graduação -->
+        <!--Onde se graduou-->
 
 <!--Orientador-->
       <div class="form-group">
@@ -121,6 +143,15 @@
           <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
           <div class="col-md-5">
             <input id="curso" name="coddisc" type="text"  class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="ativo">O aluno está ativo:</label>
+          <div class="col-md-5">
+            <select name="ativo" class="form-control">
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
           </div>
         </div>
 

@@ -25,6 +25,7 @@ CREATE TABLE Aluno (
         DRE INTEGER,
         DataGrad VARCHAR,
         LocalGrad VARCHAR,
+        Curso VARCHAR,
         Mestrado VARCHAR,
         Orientador VARCHAR,
         Corientadores VARCHAR,
