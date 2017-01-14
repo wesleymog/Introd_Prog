@@ -1,9 +1,8 @@
 <!doctype html>
-<html>
-   <body>
+   {% extends "layout.html" %}
+   {% block body %}
      <div class="alert alert-danger">
        {{ msg }}
     </div>
       <h2><a href = "{{ url_for('registro') }}">Insira mais um registro</a></h2>
-   </body>
-</html>
+   {% endblock %}
