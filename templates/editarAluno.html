@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <form class="form-horizontal" action = "{{ url_for('EditAlunos') }}" method = "POST">
+      <fieldset>
+
+<!-- Dados do aluno -->
+      <center><legend>Registro do Aluno</legend></center>
+      {{nid}}
+ {{ingresso}}
+    {% for row in rows %}
+    Olá : {{row[7]}}
+    Dados: {{rows}}
+<!-- Nome-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nome">Nome:</label>
+          <div class="col-md-5">
+            <input id="nome" name="nome" type="text"  value="{{row[1]}}"class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- DRE-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="dre">DRE:</label>
+          <div class="col-md-5">
+            <input id="dre" name="dre" type="number" value="{{row[6]}}" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Curso-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="curso">Curso:</label>
+          <div class="col-md-5">
+            <input id="curso" name="curso" type="text"  value="{{row['curso']}}"class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Telefone-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="telefone">Telefone:</label>
+          <div class="col-md-5">
+            <input id="telefone" name="telefone" value="{{row[3]}}"type="text" placeholder="(21)xxxx - xxxx" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Email-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="email">Email:</label>
+          <div class="col-md-5">
+            <input id="email" name="email" type="text"  value="{{row[4]}}" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Endereço (Rua)-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="endereco">Endereço:</label>
+          <div class="col-md-5">
+            <input id="endereco" name="endereco" value="{{row[2]}}"type="text" placeholder="Ex: Rua São João, 123" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Formulario da graduação -->
+    <center><legend>Graduação</legend></center>
+
+        <div class="form-group row">
+          <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
+          <div class="col-md-5">
+            <input class="form-control" name="datagrad" value="{{row[7]}}"type="date"  id="conclusao">
+          </div>
+        </div>
+<!-- Formulario da graduação -->
+<!--Onde se graduou-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Onde se graduou:</label>
+  <div class="col-md-5">
+    <input id="localgrad" name="localgrad" value="{{row[8]}}" type="text"  class="form-control input-md" required="">
+  </div>
+</div>
+    <center><legend>Ingresso</legend></center>
+
+        <div class="form-group row">
+          <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
+          <div class="col-md-5">
+            <input class="form-control" value="{{ingresso}}" name="ingresso" type="date"  id="ingresso">
+          </div>
+        </div>
+
+<!--Orientador-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Orientador:</label>
+        <div class="col-md-5">
+          <input id="orientador" name="orientador" type="text"  value="{{row[10]}}"class="form-control input-md" required="">
+        </div>
+      </div>
+<!--Coorientadores-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Coorientadores:</label>
+        <div class="col-md-5">
+          <input id="coorientadores" name="coorientadores" value="{{row[11]}}"type="text"  class="form-control input-md" required="">
+        </div>
+      </div>
+
+<!-- CodDisc-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
+          <div class="col-md-5">
+            <input id="curso" name="coddisc" type="text"   value="{{row[14]}}"class="form-control input-md" required="">
+          </div>
+        </div>
+{% endfor %}
+      <center>
+        <input type="submit"></input>
+      </center>
+    </fieldset>
+  </form>
+</body>
+</html>

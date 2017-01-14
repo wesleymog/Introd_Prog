@@ -51,25 +51,26 @@ def formAlunos():
          coddisc=request.form['coddisc']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
-         print 'oi'
+
          conn = sqlite3.connect('Sistema.db')
-         print 'oi'
          cursor = conn.cursor()
-         print 'oi'
+
          cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
-         print 'oi'
+
          conn.row_factory = sqlite3.Row
-         print 'oi'
+
          cursor.execute("Select Max(id) from InfoBasica")
-         print 'oi'
+
          rows = cursor.fetchall();
-         print 'oi'
+
          for row in rows:
              numero=row
          numeros=numero[0]
          print numeros
+
          cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, IDGERAL)
          VALUES (?,?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,numeros) )
+
          conn.commit()
 
          print('Dados inseridos com sucesso.')
@@ -94,6 +95,89 @@ def delete(nid):
     conn.commit()
     conn.close()
     return render_template("resultado.html")
+
+@app.route("/edit/<nid>")
+def editar(nid):
+    print nid
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=? and InfoBasica.id=?;""",(nid, nid) )
+    rows = cursor.fetchall();
+    print rows
+    for row in rows:
+        inte=str(row[12])
+        o=0
+        ano=''
+        mes=''
+        dia=''
+        for i in inte:
+            o=o+1
+            if o<5:
+                ano=ano+i
+            elif o<7 and o>4:
+                mes=mes+i
+            else:
+                dia=dia+i
+        ingresso=ano+"-"+mes+"-"+dia
+
+    return render_template("editarAluno.html",rows=rows,ingresso=ingresso, nid=nid)
+
+@app.route('/editAlunos',methods = ['POST', 'GET'])
+def EditAlunos():
+   msg=''
+   print nid
+   # if request.method == 'POST':
+   #    try:
+   #
+   #       nome = request.form['nome']
+   #       dre = request.form['dre']
+   #       curso = request.form['curso']
+   #       tel = request.form['telefone']
+   #       email=request.form['email']
+   #       endereco=request.form['endereco']
+   #       bairro=request.form['bairro']
+   #       cidade=request.form['cidade']
+   #       datagrad=request.form['datagrad']
+   #       localgrad=request.form['localgrad']
+   #       orientador=request.form['orientador']
+   #       coorientadores=request.form['coorientadores']
+   #       endereco=endereco+", "+bairro+", "+cidade
+   #       ingresso=request.form['ingresso']
+   #       coddisc=request.form['coddisc']
+   #       data=ingresso.split("-")
+   #       datafinal=data[0]+data[1]+data[2]
+   #
+   #       conn = sqlite3.connect('Sistema.db')
+   #       cursor = conn.cursor()
+   #       cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=? email=? WHERE ;",(nome,endereco,tel,email) )
+   #       cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
+   #
+   #       conn.row_factory = sqlite3.Row
+   #
+   #       cursor.execute("Select Max(id) from InfoBasica")
+   #
+   #       rows = cursor.fetchall();
+   #
+   #       for row in rows:
+   #           numero=row
+   #       numeros=numero[0]
+   #       print numeros
+   #
+   #       cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, IDGERAL)
+   #       VALUES (?,?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,numeros) )
+   #
+   #       conn.commit()
+   #
+   #       print('Dados inseridos com sucesso.')
+   #
+   #       conn.close()
+   #       msg = "Adicionado com sucesso!"
+   #    except:
+   #       con.rollback()
+   #       msg="Tem algo de errado"
+   #    finally:
+   #       return render_template("resultado.html",msg = msg)
+   #       con.close()
 #Parte visual do cadastro dos professores
 @app.route('/cadastroprof')
 def cadastroprof():
