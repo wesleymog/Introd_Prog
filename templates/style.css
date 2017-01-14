@@ -1,0 +1,102 @@
+div#topo{
+  background:#F5F5F5;
+  width:1330px;
+  height:120px;
+  margin:0 auto;
+}
+
+
+div#logo{
+  width:180px;
+  height:80px;
+  margin-top:50px;
+  float:left;
+}
+
+div#sobrenos{
+  width:140px;
+  height:75px;
+  margin-top:50px;
+  float:right;
+}
+
+div#sobrenos p{
+    font-family:Arial;
+    font-size:20px;
+}
+
+div#busca input{
+  font-family:Arial;
+  font-size:10px;
+}
+
+div#busca img{
+  font-family:Arial;
+  font-size:12px;
+}
+
+div#menu{
+  background:#2F2F2F;
+  width:1330px;
+  height:60px;
+  margin:0 auto;
+}
+
+div#menu a{
+  color:#FFF;
+  font-family:Arial;
+  font-size:22px;
+  text-decoration:none;
+  margin-top:20px;
+  margin-left:150px;
+  display:block;
+  float:left;
+}
+
+div#menu a:hover{
+  color:#00C6C6;
+}
+
+div#banner{
+  background:#F5F5F5;
+  width:1330px;
+  height:500px;
+  margin:0 auto;
+}
+
+div#container{
+  background:#2F2F2F;
+  width:1330px;
+  height:420px;
+  margin:0 auto;
+}
+
+.chamada{position:relative}
+.chamada:hover{top:-2px;box-shadow:0 2px 2px #666}
+
+div.chamada{
+  background:#F5F5F5;
+  width:300px;
+  height:380px;
+  float:left;
+  margin-top:20px;
+  margin-left:20px;
+  text-align:center;
+  font-family:sans-serif;
+}
+
+div.chamada h1{
+  font-family:Arial;
+  font-size:26px;
+  color:#2F2F2F;
+}
+
+div.chamada p{
+  font-family:Arial;
+  font-size:18px;
+  color:#2F2F2F;
+}
+
+div.chamada h1:hover{
+  color:#00C6C6;
+}
