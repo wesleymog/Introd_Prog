@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
+{% extends "layout.html" %}
+{% block head %}
     <title>Sistema de Gerenciamento Acadêmico - UFRJ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="static/style.css"/>
     <link rel="icon" type="image/gif" href="Imagens/academico.gif"/>
-  </head>
-  <body>
+    {% endblock %}
+
+    {% block body %}
     <div id="topo">
         <div class="navbar-header"><img src="https://s29.postimg.org/6tkc583k7/UFRJ.png" width="180px"/>
           <div id="sobrenos">
@@ -48,5 +48,4 @@
         <p>Dúvidas frequentes</p>
       </div>
     </div>
-  </body>
-</html>
+    {% endblock %}
