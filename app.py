@@ -125,59 +125,44 @@ def editar(nid):
 @app.route('/editAlunos',methods = ['POST', 'GET'])
 def EditAlunos():
    msg=''
-   print nid
-   # if request.method == 'POST':
-   #    try:
-   #
-   #       nome = request.form['nome']
-   #       dre = request.form['dre']
-   #       curso = request.form['curso']
-   #       tel = request.form['telefone']
-   #       email=request.form['email']
-   #       endereco=request.form['endereco']
-   #       bairro=request.form['bairro']
-   #       cidade=request.form['cidade']
-   #       datagrad=request.form['datagrad']
-   #       localgrad=request.form['localgrad']
-   #       orientador=request.form['orientador']
-   #       coorientadores=request.form['coorientadores']
-   #       endereco=endereco+", "+bairro+", "+cidade
-   #       ingresso=request.form['ingresso']
-   #       coddisc=request.form['coddisc']
-   #       data=ingresso.split("-")
-   #       datafinal=data[0]+data[1]+data[2]
-   #
-   #       conn = sqlite3.connect('Sistema.db')
-   #       cursor = conn.cursor()
-   #       cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=? email=? WHERE ;",(nome,endereco,tel,email) )
-   #       cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
-   #
-   #       conn.row_factory = sqlite3.Row
-   #
-   #       cursor.execute("Select Max(id) from InfoBasica")
-   #
-   #       rows = cursor.fetchall();
-   #
-   #       for row in rows:
-   #           numero=row
-   #       numeros=numero[0]
-   #       print numeros
-   #
-   #       cursor.execute("""INSERT INTO Aluno (DRE, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, IDGERAL)
-   #       VALUES (?,?,?,?,?,?,?,?)""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,numeros) )
-   #
-   #       conn.commit()
-   #
-   #       print('Dados inseridos com sucesso.')
-   #
-   #       conn.close()
-   #       msg = "Adicionado com sucesso!"
-   #    except:
-   #       con.rollback()
-   #       msg="Tem algo de errado"
-   #    finally:
-   #       return render_template("resultado.html",msg = msg)
-   #       con.close()
+   if request.method == 'POST':
+      try:
+         nome = request.form['nome']
+         dre = request.form['dre']
+         curso = request.form['curso']
+         tel = request.form['telefone']
+         email=request.form['email']
+         endereco=request.form['endereco']
+         datagrad=request.form['datagrad']
+         localgrad=request.form['localgrad']
+         orientador=request.form['orientador']
+         coorientadores=request.form['coorientadores']
+         ingresso=request.form['ingresso']
+         coddisc=request.form['coddisc']
+         nid=request.form['id']
+         data=ingresso.split("-")
+         datafinal=data[0]+data[1]+data[2]
+         conn = sqlite3.connect('Sistema.db')
+         cursor = conn.cursor()
+         cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
+
+
+         print 'olha a treta'
+         cursor.execute("""UPDATE Aluno SET DRE=?, DataGrad=?,
+         LocalGrad=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=? WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,nid) )
+         print 'melhor'
+         conn.commit()
+
+         print('Dados Editados com sucesso.')
+
+         conn.close()
+         msg = "Editado com sucesso!"
+      except:
+         con.rollback()
+         msg="Tem algo de errado"
+      finally:
+         return render_template("resultado.html",msg = msg)
+         con.close()
 @app.route('/index')
 def index():
     return render_template('index.html')

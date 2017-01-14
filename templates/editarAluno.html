@@ -1,8 +1,11 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   </head>
   <body>
     <form class="form-horizontal" action = "{{ url_for('EditAlunos') }}" method = "POST">
@@ -10,11 +13,9 @@
 
 <!-- Dados do aluno -->
       <center><legend>Registro do Aluno</legend></center>
-      {{nid}}
- {{ingresso}}
+
     {% for row in rows %}
-    Olá : {{row[7]}}
-    Dados: {{rows}}
+
 <!-- Nome-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="nome">Nome:</label>
@@ -104,6 +105,7 @@
         </div>
       </div>
 
+
 <!-- CodDisc-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
@@ -111,6 +113,7 @@
             <input id="curso" name="coddisc" type="text"   value="{{row[14]}}"class="form-control input-md" required="">
           </div>
         </div>
+        <input id="id" name="id" type="text"   value="{{row[0]}}"class="escondido" required="">
 {% endfor %}
       <center>
         <input type="submit"></input>

@@ -1,3 +1,6 @@
+.escondido{
+  visibility: hidden;
+}
 div#topo{
   background:#F5F5F5;
   width:1330px;
