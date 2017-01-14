@@ -3,7 +3,7 @@
   <head>
     <title>Sistema de Gerenciamento Acadêmico - UFRJ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="static/style.css"/>
     <link rel="icon" type="image/gif" href="Imagens/academico.gif"/>
   </head>
   <body>
@@ -18,10 +18,10 @@
         </div>
     </div>
     <div id="menu">
-        <a href="#">Início</a>
-        <a href="#">Sobre</a>
-        <a href="#">Cadastre-se</a>
-        <a href="#">Entrar</a>
+        <a href="./">Início</a>
+        <a href="{{url_for('sobre')}}">Sobre</a>
+        <a href="{{url_for('registro')}}">Cadastre Alunos</a>
+        <a href="{{url_for('lista')}}">Lista de Alunos</a>
     </div>
     <div id="banner"><img src="Imagens/UFRJ.jpg"/>
     </div>

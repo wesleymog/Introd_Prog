@@ -178,6 +178,12 @@ def EditAlunos():
    #    finally:
    #       return render_template("resultado.html",msg = msg)
    #       con.close()
+@app.route('/index')
+def index():
+    return render_template('index.html')
+@app.route('/Sobre')
+def sobre():
+    return render_template('Sobre.html')
 #Parte visual do cadastro dos professores
 @app.route('/cadastroprof')
 def cadastroprof():
