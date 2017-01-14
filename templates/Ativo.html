@@ -75,6 +75,7 @@
       </div>
     </nav>
     <!--formulario-->
+    {{rows}}
     <div class="container">
       <div class="row">
         <div class="span12">
@@ -84,8 +85,7 @@
 <div class="table-responsive">
 <table class="table">
 <TR>
-<TH>Codigo</TH>
-<TH>Nome</TH>
+  <TH>Nome</TH>
 <TH>Email </TH>
 <TH>Telefone </TH>
 <TH>DRE</TH>
@@ -107,23 +107,23 @@
 <TR class="cinza">
 
 
-<TD><a href="/edit/{{row['id']}}">Edit</a> {{row['id']}}</TD>
-<TD> {{row['nome']}}</TD>
-<TD>{{row['email']}}</TD>
-<TD>{{row['tel']}}</TD>
-<TD>{{row['dre']}}</TD>
-<TD>{{row['curso']}}</TD>
-<TD>{{row['DataGrad']}}</TD>
-<TD>{{row['LocalGrad']}}</TD>
-<TD>{{row['Mestrado']}}</TD>
-<TD>{{row['Orientador']}}</TD>
-<TD>{{row['Corientadores']}}</TD>
-<TD>{{row['Ingresso']}}</TD>
-<TD>{{row['Qualificacao']}}</TD>
-<TD>{{row['CodDisc']}}</TD>
-<TD>{{row['Bolsa']}}</TD>
-<TD>{{row['Ativo']}}</TD>
-<TD>{{row['Paper']}}</TD>
+
+<TD> {{row[1]}}</TD>
+<TD>{{row[4]}}</TD>
+<TD>{{row[3]}}</TD>
+<TD>{{row[6]}}</TD>
+<TD>{{row[9]}}</TD>
+<TD>{{row[7]}}</TD>
+<TD>{{row[8]}}</TD>
+<TD>{{row[10]}}</TD>
+<TD>{{row[11]}}</TD>
+<TD>{{row[12]}}</TD>
+<TD>{{row[13]}}</TD>
+<TD>{{row[14]}}</TD>
+<TD>{{row[15]}}</TD>
+<TD>{{row[16]}}</TD>
+<TD>{{row[17]}}</TD>
+<TD>{{row[18]}}</TD>
 <TD><a href="/deletar/{{row['id']}}">Deletar</a> </TD>
 </TR>
 {% endfor %}
