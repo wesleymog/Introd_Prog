@@ -34,14 +34,6 @@
           </div>
         </div>
 
-<!-- Curso-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="curso">Curso:</label>
-          <div class="col-md-5">
-            <input id="curso" name="curso" type="text"  class="form-control input-md" required="">
-          </div>
-        </div>
-
 <!-- Telefone-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="telefone">Telefone:</label>
@@ -86,24 +78,6 @@
 
 <!-- Início do Formulario da graduação -->
     <center><legend>Graduação</legend></center>
-<!--mestrado ou doutorado-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="curso">Curso:</label>
-      <div class="col-md-5">
-        <select name="curso" class="form-control">
-          <option value="mestrado">Mestrado</option>
-          <option value="doutorado">Doutorado</option>
-        </select>
-      </div>
-    </div>
-
-<!--data do ingresso-->
-      <div class="form-group row">
-        <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
-        <div class="col-md-5">
-          <input class="form-control" name="ingresso" type="date"  id="ingresso">
-        </div>
-      </div>
 
 <!--data da conclusão-->
         <div class="form-group row">
@@ -120,7 +94,26 @@
             <input id="localgrad" name="localgrad" type="text"  class="form-control input-md" required="">
           </div>
         </div>
+    <center><legend>Curso</legend></center>
 
+  <!--mestrado ou doutorado-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="curso">Curso:</label>
+        <div class="col-md-5">
+          <select name="curso" class="form-control">
+            <option value="mestrado">Mestrado</option>
+            <option value="doutorado">Doutorado</option>
+          </select>
+        </div>
+      </div>
+
+  <!--data do ingresso-->
+        <div class="form-group row">
+          <label for="ingresso" class="col-md-4 control-label">Data do ingresso neste curso:</label>
+          <div class="col-md-5">
+            <input class="form-control" name="ingresso" type="date"  id="ingresso">
+          </div>
+        </div>
 <!--bolsa-->
         <div class="form-group">
           <label class="col-md-4 control-label">Bolsista: </label>

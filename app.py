@@ -67,6 +67,7 @@ def formAlunos():
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
          ativo=request.form['ativo']
+         
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
 
