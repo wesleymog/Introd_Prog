@@ -5,10 +5,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   {% endblock %}
   {% block body %}
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <a class="navbar-brand">
+          <img alt="Brand" src="https://s30.postimg.org/3vy7stcdd/sga.png" width="80px">
+        </a>
+      </div>
+    </nav>
     <form class="form-horizontal" action = "{{ url_for('formAlunos') }}" method = "POST">
       <fieldset>
 
-<!-- Dados do aluno -->
+<!-- Dados pessoais do aluno -->
       <center><legend>Registro do Aluno</legend></center>
 
 <!-- Nome-->
@@ -74,17 +81,38 @@
             <input id="cidade" name="cidade" type="text"  class="form-control input-md" required="">
           </div>
         </div>
+        <br>
+        <br>
 
-<!-- Formulario da graduação -->
+<!-- Início do Formulario da graduação -->
     <center><legend>Graduação</legend></center>
+<!--mestrado ou doutorado-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="curso">Curso:</label>
+      <div class="col-md-5">
+        <select name="curso" class="form-control">
+          <option value="mestrado">Mestrado</option>
+          <option value="doutorado">Doutorado</option>
+        </select>
+      </div>
+    </div>
 
+<!--data do ingresso-->
+      <div class="form-group row">
+        <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
+        <div class="col-md-5">
+          <input class="form-control" name="ingresso" type="date"  id="ingresso">
+        </div>
+      </div>
+
+<!--data da conclusão-->
         <div class="form-group row">
           <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
           <div class="col-md-5">
             <input class="form-control" name="datagrad" type="date"  id="conclusao">
           </div>
         </div>
-<!-- Formulario da graduação -->
+
 <!--Onde se graduou-->
         <div class="form-group">
           <label class="col-md-4 control-label">Onde se graduou:</label>
@@ -93,43 +121,70 @@
           </div>
         </div>
 
-    <center><legend>Ingresso</legend></center>
-
-        <div class="form-group row">
-          <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
-          <div class="col-md-5">
-            <input class="form-control" name="ingresso" type="date"  id="ingresso">
+<!--bolsa-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Bolsista: </label>
+          <form>
+            <div class="col-md-5">
+              <label class="radio-inline">
+                <input type="radio" name="bolsa" id="sim" value="sim">Sim
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="bolsa" id="nao" value="nao">Não
+              </label>
+            </form>
           </div>
         </div>
 
-        <!-- Formulario da graduação -->
-            <center><legend>Qualificação</legend></center>
+        <div class="form-group">
+          <label class="col-md-4 control-label">Fonte pagadora:</label>
+          <div class="col-md-5">
+            <input id="pagbolsa" name="pagbolsa" type="text"  class="form-control input-md" required="">
+          </div>
+        </div>
 
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
-                  <div class="col-md-5">
-                    <select name="VQualificacao" class="form-control">
-                      <option value="Sim">Sim</option>
-                      <option value="Não">Não</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="conclusao" class="col-md-4 control-label">Data da qualificação:</label>
-                  <div class="col-md-5">
-                    <input class="form-control" name="dataquali" type="date"  id="conclusao">
-                  </div>
-                </div>
-        <!-- Formulario da graduação -->
-        <!--Onde se graduou-->
+        <div class="form-group row">
+          <label for="conclusao" class="col-md-4 control-label">Duração:</label>
+          <br>
+          <div class="col-md-5">
+            De: <input class="form-control" name="iniciobolsa" type="date"  id="iniciobolsa">
+            <br>
+            Até: <input class="form-control" name="fimbolsa" type="date"  id="fimbolsa">
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+  <!-- Qualificação -->
+      <center><legend>Qualificação</legend></center>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
+          <div class="col-md-5">
+            <select name="VQualificacao" class="form-control">
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+        </div>
+
+<!--quando se qualificou-->
+        <div class="form-group row">
+          <label for="conclusao" class="col-md-4 control-label">Data da qualificação:</label>
+            <div class="col-md-5">
+              <input class="form-control" name="dataquali" type="date"  id="conclusao">
+            </div>
+        </div>
 
 <!--Orientador-->
       <div class="form-group">
-        <label class="col-md-4 control-label">Orientador:</label>
+        <label class="col-md-4 control-label">Nome do orientador:</label>
         <div class="col-md-5">
           <input id="orientador" name="orientador" type="text"  class="form-control input-md" required="">
         </div>
       </div>
+
 <!--Coorientadores-->
       <div class="form-group">
         <label class="col-md-4 control-label">Coorientadores:</label>
@@ -137,23 +192,159 @@
           <input id="coorientadores" name="coorientadores" type="text"  class="form-control input-md" required="">
         </div>
       </div>
+      <br>
+      <br>
 
-<!-- CodDisc-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
-          <div class="col-md-5">
-            <input id="curso" name="coddisc" type="text"  class="form-control input-md" required="">
-          </div>
+      <!-- Formluario sobre as Disciplinas-->
+      <center><legend>Disciplinas</legend></center>
+      <br>
+      <br>
+      <h4 align="center">Disciplina 1</h4>
+      <br>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
+        <div class="col-md-5">
+          <input id="coddisc" name="coddisc" type="text"  class="form-control input-md" required="">
         </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="ativo">O aluno está ativo:</label>
-          <div class="col-md-5">
-            <select name="ativo" class="form-control">
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
+        <div class="col-md-5">
+          <input id="nomedisc" name="nomedisc" type="text" class="form-control input-md">
         </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="periododisc">Período:</label>
+        <div class="col-md-5">
+          <input id="periododisc" name="periododisc" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
+        <div class="col-md-5">
+          <select name="discbasica" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <h4 align="center">Disciplina 2</h4>
+      <br>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
+        <div class="col-md-5">
+          <input id="coddisc2" name="coddisc" type="text"  class="form-control input-md" required="">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
+        <div class="col-md-5">
+          <input id="nomedisc2" name="nomedisc" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="periododisc">Período:</label>
+        <div class="col-md-5">
+          <input id="periododisc2" name="periododisc" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
+        <div class="col-md-5">
+          <select name="discbasica2" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <h4 align="center">Disciplina 3</h4>
+      <br>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
+        <div class="col-md-5">
+          <input id="coddisc3" name="coddisc" type="text"  class="form-control input-md" required="">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
+        <div class="col-md-5">
+          <input id="nomedisc3" name="nomedisc" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="periododisc">Período:</label>
+        <div class="col-md-5">
+          <input id="periododisc3" name="periododisc" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
+        <div class="col-md-5">
+          <select name="discbasica3" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <br>
+
+<!--Paper-->
+      <center><legend>Paper</legend></center>
+      <div class="form-group">
+        <label class="col-md-4 control-label">Já submeteu um paper?</label>
+        <div class="col-md-5">
+          <form>
+            <label class="radio-inline">
+            <input type="radio" name="paper" id="sim" value="sim">Sim
+            </label>
+            <label class="radio-inline">
+            <input type="radio" name="paper" id="nao" value="nao">Não
+            </label>
+          </form>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ingresso" class="col-md-4 control-label">Data da publicação:</label>
+        <div class="col-md-5">
+            <input class="form-control" name="ingresso" type="date"  id="datapub">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ingresso" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
+        <div class="col-md-5">
+          <input id="ondepub" name="pub" type="text" class="form-control input-md">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="ativo">O aluno está ativo:</label>
+        <div class="col-md-5">
+          <select name="ativo" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <br>
 
       <center>
         <input type="submit"></input>
