@@ -90,6 +90,67 @@
             <input class="form-control" value="{{ingresso}}" name="ingresso" type="date"  id="ingresso">
           </div>
         </div>
+<!--bolsa-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Bolsista: </label>
+            <div class="col-md-5">
+              <label class="radio-inline">
+                <select name='bolsa'>
+                  <option value='sim'>sim</option>
+                  <option value="não">Não</option>
+                </select>
+              </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Fonte pagadora:</label>
+          <div class="col-md-5">
+            <input id="pagbolsa" name="pagbolsa" type="text"  class="form-control input-md" required="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="conclusao" class="col-md-4 control-label">Duração:</label>
+          <br>
+          <div class="col-md-5">
+            Inicio: <input class="form-control" name="iniciobolsa" type="date"  id="iniciobolsa">
+            <br>
+            Duração:
+            <select class="form-control" name='duracaobolsa'>
+              <option value='1'>1 ano</option>
+              <option value='2'>2 anos</option>
+              <option value='3'>3 anos</option>
+              <option value='4'>4 anos</option>
+              <option value='5'>5 anos</option>
+            </select>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+  <!-- Qualificação -->
+      <center><legend>Qualificação</legend></center>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
+          <div class="col-md-5">
+            <select name="VQualificacao" class="form-control">
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+        </div>
+
+<!--quando se qualificou-->
+        <div class="form-group row">
+          <label for="conclusao" class="col-md-4 control-label">Data da qualificação:</label>
+            <div class="col-md-5">
+              <input class="form-control" name="dataquali" type="date"  id="conclusao">
+            </div>
+        </div>
+
 
 <!--Orientador-->
       <div class="form-group">
@@ -115,6 +176,36 @@
           </div>
         </div>
         <input id="id" name="id" type="text"   value="{{row[0]}}"class="escondido" required="">
+
+        <!--Paper-->
+              <center><legend>Paper</legend></center>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Já submeteu um paper?</label>
+                <div class="col-md-5">
+                  <form>
+                    <label class="radio-inline">
+                    <input type="radio" name="paper" id="sim" value="sim">Sim
+                    </label>
+                    <label class="radio-inline">
+                    <input type="radio" name="paper" id="nao" value="nao">Não
+                    </label>
+                  </form>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="datapub" class="col-md-4 control-label">Data da publicação:</label>
+                <div class="col-md-5">
+                    <input class="form-control" name="datapub" type="date"  id="datapub">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="ondepub" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
+                <div class="col-md-5">
+                  <input id="ondepub" name="ondepub" type="text" class="form-control input-md">
+                </div>
+              </div>
 {% endfor %}
       <center>
         <input type="submit"></input>
