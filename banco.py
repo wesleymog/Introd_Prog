@@ -31,7 +31,7 @@ CREATE TABLE Aluno (
         Corientadores VARCHAR,
         Ingresso date,
         Qualificacao VARCHAR,
-        CodDisc INTEGER,
+        CodDisc VARCHAR,
         Bolsa VARCHAR,
         Ativo BOOLEAN,
         Paper VARCHAR,

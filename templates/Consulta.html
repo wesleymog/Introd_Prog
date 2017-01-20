@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+<center><legend>Alunos que já passaram da data</legend></center>
+<div class="table-responsive">
+<table class="table">
+<TR>
+<TH>Nome</TH>
+<TH>Email </TH>
+<TH>Telefone </TH>
+<TH>Endereço</TH>
+<TH>DRE</TH>
+<TH>Curso</TH>
+<TH>DataGrad</TH>
+<TH>LocalGrad</TH>
+<TH>Mestrado</TH>
+<TH>Orientador</TH>
+<TH>Corientadores</TH>
+<TH>Ingresso</TH>
+<TH>Qualificacao</TH>
+<TH>CodDisc</TH>
+<TH>Bolsa</TH>
+<TH>Ativo</TH>
+<TH>Paper</TH>
+<TH>Deletar?</TH>
+</TR>
+{% for row in rows %}
+
+<TR class="cinza">
+
+
+<TD> {{row[1]}}</TD>
+<TD>{{row[4]}}</TD>
+<TD>{{row[3]}}</TD>
+<TD>{{row[6]}}</TD>
+<TD>{{row[2]}}</TD>
+<TD>{{row[9]}}</TD>
+<TD>{{row[7]}}</TD>
+<TD>{{row[8]}}</TD>
+<TD>{{row[10]}}</TD>
+<TD>{{row[11]}}</TD>
+<TD>{{row[12]}}</TD>
+<TD>{{row[13]}}</TD>
+<TD>{{row[14]}}</TD>
+<TD>{{row[15]}}</TD>
+<TD>{{row[16]}}</TD>
+<TD>{{row[17]}}</TD>
+<TD>{{row[18]}}</TD>
+<TD><a href="/deletar/{{row['id']}}">Deletar</a> </TD>
+</TR>
+{% endfor %}
+</TABLE>
+
+</div>
+{% endblock %}

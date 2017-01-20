@@ -1,8 +1,11 @@
   {% extends "layout.html" %}
   {% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="static/app.js"></script>
   {% endblock %}
   {% block body %}
     <nav class="navbar navbar-default">
@@ -30,7 +33,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="dre">DRE:</label>
           <div class="col-md-5">
-            <input id="dre" name="dre" type="number"  class="form-control input-md" required="">
+            <input id="dre" name="dre" type="number"  class="form-control input-md" required="" max='999999999' min='100000000'>
           </div>
         </div>
 
@@ -75,7 +78,27 @@
         </div>
         <br>
         <br>
+      <div id="minhaDiv" style="display: none;">
+          <center><legend>Mestrado</legend></center>
+          <div class="form-group row">
+            <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
+            <div class="col-md-5">
+              <input class="form-control" name="datamest" type="date"  id="conclusao">
+            </div>
+          </div>
 
+
+  <!--Onde se graduou-->
+          <div class="form-group">
+            <label class="col-md-4 control-label">Onde se graduou:</label>
+            <div class="col-md-5">
+              <input id="localgrad" name="localmest" type="text"  class="form-control input-md" >
+            </div>
+          </div>
+        </div>
+        <center>
+        <button type="button" class='alert alert-link ' onclick="Mudarestado('minhaDiv')">Possui Mestrado</button>
+      </center>
 <!-- Início do Formulario da graduação -->
     <center><legend>Graduação</legend></center>
 
@@ -117,15 +140,13 @@
 <!--bolsa-->
         <div class="form-group">
           <label class="col-md-4 control-label">Bolsista: </label>
-          <form>
             <div class="col-md-5">
               <label class="radio-inline">
-                <input type="radio" name="bolsa" id="sim" value="sim">Sim
+                <select name='bolsa'>
+                  <option value='sim'>sim</option>
+                  <option value="nao">Não</option>
+                </select>
               </label>
-              <label class="radio-inline">
-                <input type="radio" name="bolsa" id="nao" value="nao">Não
-              </label>
-            </form>
           </div>
         </div>
 
@@ -140,9 +161,16 @@
           <label for="conclusao" class="col-md-4 control-label">Duração:</label>
           <br>
           <div class="col-md-5">
-            De: <input class="form-control" name="iniciobolsa" type="date"  id="iniciobolsa">
+            Inicio: <input class="form-control" name="iniciobolsa" type="date"  id="iniciobolsa">
             <br>
-            Até: <input class="form-control" name="fimbolsa" type="date"  id="fimbolsa">
+            Duração:
+            <select class="form-control" name='duracaobolsa'>
+              <option value='1'>1 ano</option>
+              <option value='2'>2 anos</option>
+              <option value='3'>3 anos</option>
+              <option value='4'>4 anos</option>
+              <option value='5'>5 anos</option>
+            </select>
           </div>
         </div>
 
@@ -157,7 +185,7 @@
           <div class="col-md-5">
             <select name="VQualificacao" class="form-control">
               <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
+              <option value="Nao">Não</option>
             </select>
           </div>
         </div>
@@ -192,138 +220,38 @@
       <center><legend>Disciplinas</legend></center>
       <br>
       <br>
-      <h4 align="center">Disciplina 1</h4>
+      <h4 align="center">Disciplinas</h4>
       <br>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
+        <label class="col-md-4 control-label" for="coddisc">Código das disciplinas que já cursou:</label>
         <div class="col-md-5">
-          <input id="coddisc" name="coddisc" type="text"  class="form-control input-md" required="">
+          <input id="coddisc" name="coddisc" type="text" placeholder="COD01,COD02" class="form-control input-md" required="">
         </div>
       </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
-        <div class="col-md-5">
-          <input id="nomedisc" name="nomedisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="periododisc">Período:</label>
-        <div class="col-md-5">
-          <input id="periododisc" name="periododisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
-        <div class="col-md-5">
-          <select name="discbasica" class="form-control">
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <br>
-
-      <h4 align="center">Disciplina 2</h4>
-      <br>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
-        <div class="col-md-5">
-          <input id="coddisc2" name="coddisc" type="text"  class="form-control input-md" required="">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
-        <div class="col-md-5">
-          <input id="nomedisc2" name="nomedisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="periododisc">Período:</label>
-        <div class="col-md-5">
-          <input id="periododisc2" name="periododisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
-        <div class="col-md-5">
-          <select name="discbasica2" class="form-control">
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <br>
-
-      <h4 align="center">Disciplina 3</h4>
-      <br>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="coddisc">Código da disciplina:</label>
-        <div class="col-md-5">
-          <input id="coddisc3" name="coddisc" type="text"  class="form-control input-md" required="">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="nomedisc">Nome:</label>
-        <div class="col-md-5">
-          <input id="nomedisc3" name="nomedisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="periododisc">Período:</label>
-        <div class="col-md-5">
-          <input id="periododisc3" name="periododisc" type="text" class="form-control input-md">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="basica">É uma disciplina básica?</label>
-        <div class="col-md-5">
-          <select name="discbasica3" class="form-control">
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <br>
 
 <!--Paper-->
       <center><legend>Paper</legend></center>
       <div class="form-group">
         <label class="col-md-4 control-label">Já submeteu um paper?</label>
         <div class="col-md-5">
-          <form>
-            <label class="radio-inline">
-            <input type="radio" name="paper" id="sim" value="sim">Sim
-            </label>
-            <label class="radio-inline">
-            <input type="radio" name="paper" id="nao" value="nao">Não
-            </label>
-          </form>
+          <select name="paper" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="Nao">Não</option>
+          </select>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="ingresso" class="col-md-4 control-label">Data da publicação:</label>
+        <label for="datapub" class="col-md-4 control-label">Data da publicação:</label>
         <div class="col-md-5">
-            <input class="form-control" name="ingresso" type="date"  id="datapub">
+            <input class="form-control" name="datapub" type="date"  id="datapub">
           </div>
       </div>
 
       <div class="form-group">
-        <label for="ingresso" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
+        <label for="ondepub" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
         <div class="col-md-5">
-          <input id="ondepub" name="pub" type="text" class="form-control input-md">
+          <input id="ondepub" name="ondepub" type="text" class="form-control input-md">
         </div>
       </div>
 
@@ -332,16 +260,17 @@
         <div class="col-md-5">
           <select name="ativo" class="form-control">
             <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
+            <option value="Nao">Não</option>
           </select>
         </div>
       </div>
-      <br>
-      <br>
 
+      
       <center>
-        <input type="submit"></input>
+
+        <input type="submit" class="btn btn-alert"></input>
       </center>
     </fieldset>
   </form>
+
 {% endblock %}

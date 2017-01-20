@@ -1,6 +1,7 @@
 .escondido{
-  visibility: hidden;
+  display: none;
 }
+
 div#topo{
   background:#F5F5F5;
   width:1330px;
@@ -101,4 +102,7 @@ div.chamada p{
 
 div.chamada h1:hover{
   color:#1aa3ff;
+}
+.centro{
+  margin-left: 50%;
 }

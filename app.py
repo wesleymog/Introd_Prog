@@ -1,6 +1,7 @@
 #coding:utf-8
 from flask import Flask, render_template, redirect, url_for, request, Response
 import sqlite3
+from datetime import date
 
 app = Flask(__name__)
 msg=''
@@ -26,7 +27,18 @@ def registroProf():
 @app.route("/registroDisc")
 def registroDisc():
     return render_template("registroDisc")
-
+@app.route('/consulta')
+def consulta():
+    hj = date.today()
+    lista=str(hj).split("-")
+    data=lista[0]+lista[1]+lista[2]
+    print data
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+30000)<? ;""",(data,) )
+    rows = cursor.fetchall();
+    print rows
+    return render_template("Consulta.html",rows=rows)
 @app.route('/ativos')
 def ativos():
     conn = sqlite3.connect('Sistema.db')
@@ -47,10 +59,10 @@ def lista():
 
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
-   msg=''
+   msg='Há algo de errado, tente novamente'
    if request.method == 'POST':
       try:
-
+         print 'oi'
          nome = request.form['nome']
          dre = request.form['dre']
          curso = request.form['curso']
@@ -66,8 +78,45 @@ def formAlunos():
          endereco=endereco+", "+bairro+", "+cidade
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
+         print 'oi'
          ativo=request.form['ativo']
-         
+         bolsa=request.form['bolsa']
+         pagbolsa=request.form['pagbolsa']
+         iniciobolsa=request.form['iniciobolsa']
+         duracaobolsa=request.form['duracaobolsa']
+         vquali=request.form['VQualificacao']
+         dataquali=request.form['dataquali']
+         paper=request.form['paper']
+         datapub=request.form['datapub']
+         ondepub=request.form['ondepub']
+         datamest=request.form['datamest']
+         localmest=request.form['localmest']
+         mestrado=datamest+" , "+localmest
+         if datamest=='' or localmest=='':
+             mestrado=None
+             print mestrado
+
+         print bolsa
+         print 'caralho'+paper
+         print vquali
+         if bolsa=='sim':
+             bolsaFinal=pagbolsa+','+duracaobolsa
+             print bolsaFinal
+         elif bolsa=='nao':
+             bolsaFinal=None
+         if paper=='Sim':
+             paperFinal=datapub+","+ondepub
+             print paperFinal
+         elif paper=='Nao':
+             paperFinal=None
+             print paperFinal
+             print 4
+         if vquali=='Sim':
+             qualificacao=dataquali
+             print qualificacao
+         elif vquali=='Nao':
+             qualificacao=None
+             print qualificacao
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
 
@@ -86,10 +135,10 @@ def formAlunos():
          numeros=numero[0]
          if ativo=='Sim':
              ativo=True
-         elif ativo=='Não':
+         elif ativo=='Nao':
              ativo=False
-         cursor.execute("""INSERT INTO Aluno (DRE,Curso, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,CodDisc, Ativo,IDGERAL)
-         VALUES (?,?,?,?,?,?,?,?,?,?)""",(dre,curso,datagrad,localgrad,orientador,coorientadores,datafinal,coddisc,ativo,numeros) )
+         cursor.execute("""INSERT INTO Aluno (DRE,Curso, DataGrad, LocalGrad, Orientador, Corientadores, Ingresso,Qualificacao,CodDisc,Bolsa, Ativo,Paper,Mestrado,IDGERAL)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",(dre,curso,datagrad,localgrad,orientador,coorientadores,datafinal,qualificacao,coddisc,bolsaFinal,ativo,paperFinal,mestrado,numeros) )
 
          conn.commit()
 
@@ -206,6 +255,37 @@ def EditAlunos():
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
          ativo=request.form['ativo']
+
+         bolsa=request.form['bolsa']
+         pagbolsa=request.form['pagbolsa']
+         iniciobolsa=request.form['iniciobolsa']
+         duracaobolsa=request.form['duracaobolsa']
+         vquali=request.form['VQualificacao']
+         dataquali=request.form['dataquali']
+         paper=request.form['paper']
+         datapub=request.form['datapub']
+         ondepub=request.form['ondepub']
+
+         print paper
+         print 'bolsa'
+         print vquali
+         if bolsa=='sim':
+             bolsaFinal=pagbolsa+','+duracaobolsa
+             print bolsaFinal
+         elif bolsa=='não':
+             bolsaFinal=None
+         if paper=='sim':
+             paperFinal=datapub+","+ondepub
+             print paperFinal
+         elif paper=='não':
+             paperFinal=None
+             print paperFinal
+         if vquali=='Sim':
+             qualificacao=dataquali
+             print qualificacao
+         elif vquali=='Não':
+             qualificacao=None
+             print qualificacao
          nid=request.form['id']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
@@ -214,12 +294,9 @@ def EditAlunos():
          cursor = conn.cursor()
          cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
 
-
-         print 'olha a treta'
          cursor.execute("""UPDATE Aluno SET DRE=?, DataGrad=?,
-         LocalGrad=?,Curso=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=?
-         WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,curso,orientador,coorientadores,datafinal,coddisc,nid) )
-         print 'melhor'
+         LocalGrad=?,Curso=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=?,Bolsa=?,Ativo=?,Paper=?
+         WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,curso,orientador,coorientadores,datafinal,coddisc,bolsaFinal,ativo,paperFinal,nid) )
          conn.commit()
 
          print('Dados Editados com sucesso.')
