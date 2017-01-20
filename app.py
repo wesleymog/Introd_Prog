@@ -2,6 +2,8 @@
 from flask import Flask, render_template, redirect, url_for, request, Response
 import sqlite3
 from datetime import date
+from types import *
+
 
 app = Flask(__name__)
 msg=''
@@ -35,7 +37,7 @@ def consulta():
     print data
     conn = sqlite3.connect('Sistema.db')
     cursor = conn.cursor()
-    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+30000)<? ;""",(data,) )
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+20000)<? and Aluno.curso='mestrado' ;""",(data,) )
     rows = cursor.fetchall();
     print rows
     return render_template("Consulta.html",rows=rows)
@@ -100,7 +102,7 @@ def formAlunos():
          print 'caralho'+paper
          print vquali
          if bolsa=='sim':
-             bolsaFinal=pagbolsa+','+duracaobolsa
+             bolsaFinal=pagbolsa+','+duracaobolsa+','+iniciobolsa
              print bolsaFinal
          elif bolsa=='nao':
              bolsaFinal=None
@@ -324,11 +326,64 @@ def EditAlunos():
 @app.route('/pesquisa')
 def pesquisa():
     return render_template('Pesquisa.html')
+@app.route('/pesquisaaluno',methods = ['POST', 'GET'])
+def pesquisaaluno():
+    valor=request.form['value']
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Aluno  where InfoBasica.nome=? or Aluno.DRE=? ;""",(valor,valor) )
+    rows = cursor.fetchall();
+    return render_template("Consulta.html",rows=rows)
+@app.route('/pesquisabolsa',methods = ['POST', 'GET'])
+def pesquisabolsa():
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select Aluno.Bolsa,InfoBasica.nome from InfoBasica,Aluno  where InfoBasica.id=Aluno.IDGERAL ;""" )
+    rows = cursor.fetchall();
+    nomes=[]
+    for i in rows:
+        bolsa=i[0].split(',')
+        print bolsa
+        data=bolsa[2].split("-")
+        datafinal=int(data[0]+data[1]+data[2])
+        duracao=int(bolsa[1])
+        datahoje=int(date.today().strftime('%Y%m%d'))
+        print type(duracao)
+        print type(datahoje)
+        datalim=datahoje-(duracao*10000)
+        if datafinal<datalim:
+            nomes.append(i[1])
+
+
+
+    return render_template("pesquisabolsa.html",nomes=nomes)
 @app.route('/disciplina')
 def disciplina():
     return render_template('registroDisc.html')
-@app.route('/cadastroDisc')
+@app.route('/cadastroDisc' ,methods = ['POST', 'GET'])
 def cadastroDisc():
+    if request.method == 'POST':
+       try:
+           CodDisc=request.form['coddisc']
+           nomedisc=request.form['nomedisc']
+           periododisc=request.form['periododisc']
+           basicadisc=request.form['basicadisc']
+           conn = sqlite3.connect('Sistema.db')
+           cursor = conn.cursor()
+
+           cursor.execute("INSERT INTO Disciplina (CodDisc, Nome, Periodo, Basica) VALUES (?,?,?,?)",(CodDisc,nomedisc,periododisc,basicadisc) )
+           conn.commit()
+
+           print('Dados inseridos com sucesso.')
+           msg='cadastrado com sucesso'
+
+           conn.close()
+       except:
+              conn.rollback()
+              msg="Tem algo de errado"
+       finally:
+              return render_template("resultado.html",msg = msg)
+
     return render_template("resultado.html")
 @app.route('/')
 def index():

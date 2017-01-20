@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title%}Pesquisa{% endblock %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+{%for i in nomes%}
+<div class="container">
+  <center><legend>Lista de Alunos Bolsista</legend></center>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{i}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endfor%}
+  {% endblock %}
