@@ -40,7 +40,9 @@ def consulta():
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+20000)<? and Aluno.curso='mestrado' ;""",(data,) )
     rows = cursor.fetchall();
     print rows
-    return render_template("Consulta.html",rows=rows)
+    nivel='Mestrado'
+    return render_template("Consulta.html",rows=rows, nivel=nivel)
+
 @app.route('/ativos')
 def ativos():
     conn = sqlite3.connect('Sistema.db')
@@ -48,6 +50,19 @@ def ativos():
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and Ativo=1;""" )
     rows = cursor.fetchall();
     return render_template("Ativo.html", rows=rows)
+@app.route('/consultaDoutorado')
+def consultaDoutorado():
+    hj = date.today()
+    lista=str(hj).split("-")
+    data=lista[0]+lista[1]+lista[2]
+    print data
+    conn = sqlite3.connect('Sistema.db')
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+30000)<? and Aluno.curso='doutorado' ;""",(data,) )
+    rows = cursor.fetchall();
+    print rows
+    nivel='Doutorado'
+    return render_template("Consulta.html",rows=rows, nivel=nivel)
 
 @app.route("/lista")
 def lista():
