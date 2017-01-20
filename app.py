@@ -91,7 +91,7 @@ def formAlunos():
          ondepub=request.form['ondepub']
          datamest=request.form['datamest']
          localmest=request.form['localmest']
-         mestrado=datamest+" , "+localmest
+         mestrado=datamest+","+localmest
          if datamest=='' or localmest=='':
              mestrado=None
              print mestrado
@@ -203,23 +203,37 @@ def formProfessores():
 @app.route("/deletar/<nid>")
 def delete(nid):
     print nid
-    conn = sqlite3.connect('Sistema.db')
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM Aluno WHERE id=?;""",(nid) )
-    cursor.execute("""DELETE FROM InfoBasica WHERE id=?;""",(nid) )
-    conn.commit()
-    conn.close()
-    return render_template("resultado.html")
+    try:
+        conn = sqlite3.connect('Sistema.db')
+        cursor = conn.cursor()
+        cursor.execute("""DELETE FROM Aluno WHERE IDGERAL=?;""",(nid, ) )
+        cursor.execute("""DELETE FROM InfoBasica WHERE id=?;""",(nid, ) )
+        conn.commit()
+        msg='Deletado com sucesso!'
+    except:
+       con.rollback()
+       msg="Tem algo de errado"
+    finally:
+       return render_template("resultado.html",msg = msg)
+       con.close()
 
 @app.route("/edit/<nid>")
 def editar(nid):
     print nid
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=? and InfoBasica.id=?;""",(nid, nid) )
     rows = cursor.fetchall();
     print rows
     for row in rows:
+        bolsa=str(row['Bolsa'])
+        bolsa=bolsa.split(',')
+        mestrado=str(row['Mestrado'])
+        mestrado=mestrado.split(',')
+        paper=str(row['Paper'])
+        paper=paper.split(',')
+        print paper
         inte=str(row[13])
         o=0
         ano=''
@@ -234,8 +248,9 @@ def editar(nid):
             else:
                 dia=dia+i
         ingresso=ano+"-"+mes+"-"+dia
+        ingressofinal=''
 
-    return render_template("editarAluno.html",rows=rows,ingresso=ingresso, nid=nid)
+    return render_template("editarAluno.html",rows=rows,ingresso=ingresso, nid=nid,bolsa=bolsa, mestrado=mestrado, paper=paper)
 
 @app.route('/editAlunos',methods = ['POST', 'GET'])
 def EditAlunos():
@@ -255,48 +270,45 @@ def EditAlunos():
          ingresso=request.form['ingresso']
          coddisc=request.form['coddisc']
          ativo=request.form['ativo']
-
          bolsa=request.form['bolsa']
          pagbolsa=request.form['pagbolsa']
-         iniciobolsa=request.form['iniciobolsa']
          duracaobolsa=request.form['duracaobolsa']
          vquali=request.form['VQualificacao']
          dataquali=request.form['dataquali']
          paper=request.form['paper']
          datapub=request.form['datapub']
          ondepub=request.form['ondepub']
-
-         print paper
-         print 'bolsa'
-         print vquali
-         if bolsa=='sim':
+         datamest=request.form['datamest']
+         localmest=request.form['localmest']
+         mestrado=datamest+","+localmest
+         if datamest=='' or localmest=='':
+             mestrado=None
+         if bolsa=='Sim':
              bolsaFinal=pagbolsa+','+duracaobolsa
-             print bolsaFinal
-         elif bolsa=='não':
+         elif bolsa=='nao':
              bolsaFinal=None
-         if paper=='sim':
+         print 'oi'
+         if paper=='Sim':
              paperFinal=datapub+","+ondepub
              print paperFinal
-         elif paper=='não':
+         elif paper=='nao':
              paperFinal=None
              print paperFinal
          if vquali=='Sim':
              qualificacao=dataquali
              print qualificacao
-         elif vquali=='Não':
+         elif vquali=='nao':
              qualificacao=None
              print qualificacao
          nid=request.form['id']
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
-
          conn = sqlite3.connect('Sistema.db')
          cursor = conn.cursor()
          cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
-
          cursor.execute("""UPDATE Aluno SET DRE=?, DataGrad=?,
-         LocalGrad=?,Curso=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=?,Bolsa=?,Ativo=?,Paper=?
-         WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,curso,orientador,coorientadores,datafinal,coddisc,bolsaFinal,ativo,paperFinal,nid) )
+         LocalGrad=?,Curso=?, Orientador=?, Corientadores=?, Ingresso=?,CodDisc=?,Bolsa=?,Ativo=?,Paper=?, Mestrado=?
+         WHERE IDGERAL=? ;""",(dre,datagrad,localgrad,curso,orientador,coorientadores,datafinal,coddisc,bolsaFinal,ativo,paperFinal,mestrado,nid) )
          conn.commit()
 
          print('Dados Editados com sucesso.')
@@ -309,7 +321,15 @@ def EditAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
-
+@app.route('/pesquisa')
+def pesquisa():
+    return render_template('Pesquisa.html')
+@app.route('/disciplina')
+def disciplina():
+    return render_template('registroDisc.html')
+@app.route('/cadastroDisc')
+def cadastroDisc():
+    return render_template("resultado.html")
 @app.route('/')
 def index():
     return render_template('index.html')

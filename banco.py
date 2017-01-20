@@ -54,6 +54,17 @@ CREATE TABLE Professor (
 """)
 
 print('Tabela criada com sucesso.')
+cursor.execute("""
+CREATE TABLE Disciplina (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        CodDisc varchar,
+        Nome VARCHAR,
+        Periodo VARCHAR,
+        Basica BOOLEAN
+);
+""")
+
+print('Tabela criada com sucesso.')
 
 # desconectando...
 conn.close()

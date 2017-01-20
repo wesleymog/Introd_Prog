@@ -1,8 +1,11 @@
 <html>
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
-
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+  <script src="static/app.js"></script>
   <style>
   .bg-4 {
   background-color: #2f2f2f;
@@ -27,7 +30,7 @@
   {% block head %}{% endblock %}
   </head>
   <body>
-    
+
   {% block body %}{% endblock %}
 
       <div class="container-fluid bg-4 text-center">
