@@ -37,7 +37,7 @@ def consulta():
     print data
     conn = sqlite3.connect('Sistema.db')
     cursor = conn.cursor()
-    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+20000)<? and Aluno.curso='mestrado' ;""",(data,) )
+    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+20000)>? and Aluno.curso='mestrado' ;""",(data,) )
     rows = cursor.fetchall();
     print rows
     nivel='Mestrado'
