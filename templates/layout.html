@@ -1,81 +1,61 @@
+<!DOCTYPE html>
 <html>
   <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    {% block title %}
-    {% endblock %}
-  </title>
-  <script src="static/app.js"></script>
-  <style>
-  .bg-4 {
-  background-color: #2f2f2f;
-  color: #ffffff;
-  }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <script src="static/app.js"></script>
+    <style>
+    .bg-4 {
+      background-color: #2f2f2f;
+      color: #ffffff;
+    }
 
-  .container-fluid {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  }
+    .container-fluid {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
 
-  .navbar {
-  height: 70px;
-  }
+    .navbar {
+      height: 70px;
+    }
 
-  </style>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
-  {% block head %}{% endblock %}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div id='topo'>
-    <div class="navbar-header"><img src="static/Imagens/UFRJ.png" width="180px"/></div>
-  </div>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{url_for('index')}}">Sistema de Gerenciamento</a>
-    </div>
-    <ul class="nav navbar-nav">
+    {% block body %}
+    {% endblock %}
 
-      <li><a href="{{url_for('sobre')}}">Sobre Nós</a></li>
-      <li><a href="{{url_for('registro')}}">Inserir Alunos</a></li>
-      <li><a href="{{url_for('lista')}}">Lista de Alunos</a></li>
-      <li><a href="{{url_for('registroProf')}}">Inserir Professor</a></li>
-      <li><a href="{{url_for('listaProf')}}">Lista Professor</a></li>
-      <li><a href="{{url_for('pesquisa')}}">Pesquisas</a></li>
-      <li><a href="{{url_for('disciplina')}}">Registro Disciplina</a></li>
-    </ul>
-    </div>
-    </nav>
-  {% block body %}{% endblock %}
+<!--Footer-->
+    <div class="container-fluid bg-4 text-center">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Endereço</h3>
+          <p>Av. Pedro Calmon. nº 550 - Prédio da Reitoria, 2º andar
+          <br> Cidade Universitária - Rio de Janeiro, RJ
+          <br>CEP: 21941-901
+          <br><br>Universidade Federal do Rio de Janeiro/UFRJ</p>
+        </div>
 
-      <div class="container-fluid bg-4 text-center">
-        <div class="row">
-          <div class="col-md-4"><h3>Endereço</h3>
-            <p>Av. Pedro Calmon. nº 550 - Prédio da Reitoria, 2º andar
-              <br> Cidade Universitária - Rio de Janeiro, RJ
-              <br>CEP: 21941-901
-              <br><br>Universidade Federal do Rio de Janeiro/UFRJ</p>
-            </div>
+        <div class="col-md-4">
+          <img src="http://www.residenciamedica.com.br/wp-content/uploads/2014/10/ufrj.png" width="180px">
+        </div>
 
-            <div class="col-md-4">
-              <img src="http://www.residenciamedica.com.br/wp-content/uploads/2014/10/ufrj.png" width="180px">
-            </div>
-
-            <div class="col-md-4">
-              <h3>Contato</h3>
-              <p>
-                Telefone: +55 (21) 3938-9600 | Fax: +55 (21) 3938-1605
-                <br><br>
-                <br>Acesso à Graduação da UFRJ:
-                <br> Tel: (21) 3938-9430 | E-mail: acessograduacao@ufrj.br
-              </p>
-            </div>
-          </div>
+        <div class="col-md-4">
+          <h3>Contato</h3>
+          <p>
+          Telefone: +55 (21) 3938-9600 | Fax: +55 (21) 3938-1605
+          <br><br>
+          <br>Acesso à Graduação da UFRJ:
+          <br> Tel: (21) 3938-9430 | E-mail: acessograduacao@ufrj.br
+          </p>
+        </div>
       </div>
-    </body>
-  </html>
+    </div>
+  </body>
+</html>

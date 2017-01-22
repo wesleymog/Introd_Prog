@@ -1,79 +1,67 @@
-    {% extends "layout.html" %}
-    {% block title %} Lista de Ativos {% endblock %}
-
-    {% block head %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
+{% extends "layout.html" %}
+{% block title %} Lista de Ativos {% endblock %}
+{% block head %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  {% endblock %}
-  {% block body %}
-    
+{% endblock %}
+{% block body %}
     <!--formulario-->
 
-    <div class="container">
-      <div class="row">
-        <div class="span12">
-<a href="{{url_for('registro')}}"><h4>Incluir registro</h4></a>
-<div class="table-responsive">
-<table class="table">
-<TR>
-  <TH>Nome</TH>
-<TH>Email </TH>
-<TH>Telefone </TH>
-<TH>DRE</TH>
-<TH>Curso</TH>
-<TH>DataGrad</TH>
-<TH>LocalGrad</TH>
-<TH>Mestrado</TH>
-<TH>Orientador</TH>
-<TH>Corientadores</TH>
-<TH>Ingresso</TH>
-<TH>Qualificacao</TH>
-<TH>CodDisc</TH>
-<TH>Bolsa</TH>
-<TH>Ativo</TH>
-<TH>Paper</TH>
-<TH>Deletar?</TH>
-</TR>
-{% for row in rows %}
-<TR class="cinza">
-
-
-
-<TD> {{row[1]}}</TD>
-<TD>{{row[4]}}</TD>
-<TD>{{row[3]}}</TD>
-<TD>{{row[6]}}</TD>
-<TD>{{row[9]}}</TD>
-<TD>{{row[7]}}</TD>
-<TD>{{row[8]}}</TD>
-<TD>{{row[10]}}</TD>
-<TD>{{row[11]}}</TD>
-<TD>{{row[12]}}</TD>
-<TD>{{row[13]}}</TD>
-<TD>{{row[14]}}</TD>
-<TD>{{row[15]}}</TD>
-<TD>{{row[16]}}</TD>
-<TD>{{row[17]}}</TD>
-<TD>{{row[18]}}</TD>
-<TD><a href="/deletar/{{row['id']}}">Deletar</a> </TD>
-</TR>
-{% endfor %}
-</TABLE>
-
-</div>
-                    <br><br><br>
-                  </div>
-                </div>
-              </center>
-
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <a href="{{url_for('registro')}}"><h4>Incluir registro</h4></a>
+        <div class="table-responsive">
+          <table class="table">
+            <TR>
+              <TH>Nome</TH>
+              <TH>Email </TH>
+              <TH>Telefone </TH>
+              <TH>DRE</TH>
+              <TH>Curso</TH>
+              <TH>DataGrad</TH>
+              <TH>LocalGrad</TH>
+              <TH>Mestrado</TH>
+              <TH>Orientador</TH>
+              <TH>Corientadores</TH>
+              <TH>Ingresso</TH>
+              <TH>Qualificacao</TH>
+              <TH>CodDisc</TH>
+              <TH>Bolsa</TH>
+              <TH>Ativo</TH>
+              <TH>Paper</TH>
+              <TH>Deletar?</TH>
+            </TR>
+            {% for row in rows %}
+              <TR class="cinza">
+                <TD> {{row[1]}}</TD>
+                <TD>{{row[4]}}</TD>
+                <TD>{{row[3]}}</TD>
+                <TD>{{row[6]}}</TD>
+                <TD>{{row[9]}}</TD>
+                <TD>{{row[7]}}</TD>
+                <TD>{{row[8]}}</TD>
+                <TD>{{row[10]}}</TD>
+                <TD>{{row[11]}}</TD>
+                <TD>{{row[12]}}</TD>
+                <TD>{{row[13]}}</TD>
+                <TD>{{row[14]}}</TD>
+                <TD>{{row[15]}}</TD>
+                <TD>{{row[16]}}</TD>
+                <TD>{{row[17]}}</TD>
+                <TD>{{row[18]}}</TD>
+                <TD><a href="/deletar/{{row['id']}}">Deletar</a> </TD>
+              </TR>
+            {% endfor %}
+          </TABLE>
         </div>
+        <br><br><br>
       </div>
     </div>
-
-
- {% endblock %}
+  </div>
+{% endblock %}
