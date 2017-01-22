@@ -1,22 +1,21 @@
-{% extends "layout.html" %}
-{% block title%}Edição de Aluno{% endblock %}
+  {% extends "layout.html" %}
+  {% block title%}Edição de Aluno{% endblock %}
 
-{% block head %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  {% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-{% endblock %}
-{% block body %}
-  <form class="form-horizontal" action = "{{ url_for('EditAlunos') }}" method = "POST">
-    <fieldset>
+  {% endblock %}
+  {% block body %}
+    <form class="form-horizontal" action = "{{ url_for('EditAlunos') }}" method = "POST">
+      <fieldset>
 
 <!-- Dados do aluno -->
       <center><legend>Registro do Aluno</legend></center>
-      {% for row in rows %}
-        {{row['Qualificacao']}}
+    {% for row in rows %}
 
 <!-- Nome-->
         <div class="form-group">
@@ -67,7 +66,7 @@
         </div>
 
 <!-- Formulario da graduação -->
-        <center><legend>Graduação</legend></center>
+    <center><legend>Graduação</legend></center>
 
         <div class="form-group row">
           <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
@@ -75,33 +74,29 @@
             <input class="form-control" name="datagrad" value="{{row['DataGrad']}}"type="date"  id="conclusao">
           </div>
         </div>
+<div class="form-group">
+  <label class="col-md-4 control-label">Onde se graduou:</label>
+  <div class="col-md-5">
+    <input id="localgrad" name="localgrad" value="{{row['LocalGrad']}}" type="text"  class="form-control input-md" required="">
+  </div>
+</div>
+    <center><legend>Mestrado</legend></center>
+    <div class="form-group row">
+      <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
+      <div class="col-md-5">
+        <input class="form-control" name="datamest" value="{{mestrado[0]}}" type="date"  id="conclusao">
+      </div>
+    </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label">Onde se graduou:</label>
-          <div class="col-md-5">
-            <input id="localgrad" name="localgrad" value="{{row['LocalGrad']}}" type="text"  class="form-control input-md" required="">
-          </div>
-        </div>
-
-<!--Mestrado-->
-        <center><legend>Mestrado</legend></center>
-
-        <div class="form-group row">
-          <label for="conclusao" class="col-md-4 control-label">Data da conclusão:</label>
-          <div class="col-md-5">
-            <input class="form-control" name="datamest" value="{{mestrado[0]}}" type="date"  id="conclusao">
-          </div>
-        </div>
 
 <!--Onde se graduou-->
-        <div class="form-group">
-          <label class="col-md-4 control-label">Onde se mestrou:</label>
-          <div class="col-md-5">
-            <input id="localgrad" name="localmest" type="text"  value="{{mestrado[1]}}" class="form-control input-md" >
-          </div>
-        </div>
-
-        <center><legend>Ingresso</legend></center>
+    <div class="form-group">
+      <label class="col-md-4 control-label">Onde se mestrou:</label>
+      <div class="col-md-5">
+        <input id="localgrad" name="localmest" type="text"  value="{{mestrado[1]}}" class="form-control input-md" >
+      </div>
+    </div>
+    <center><legend>Ingresso</legend></center>
 
         <div class="form-group row">
           <label for="ingresso" class="col-md-4 control-label">Data do ingresso:</label>
@@ -109,7 +104,6 @@
             <input class="form-control" value="{{ingresso}}" name="ingresso" type="date"  id="ingresso">
           </div>
         </div>
-
 <!--bolsa-->
 
         <div class="form-group">
@@ -121,16 +115,14 @@
                 <option value="nao">Não</option>
               </select>
             </label>
-          </div>
         </div>
-
+        </div>
         <div class="form-group">
           <label class="col-md-4 control-label">Fonte pagadora:</label>
           <div class="col-md-5">
             <input id="pagbolsa" name="pagbolsa" type="text"  class="form-control input-md" value='{{bolsa[0]}}'required="">
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-md-4 control-label">Duração:</label>
           <div class="col-md-5">
@@ -142,41 +134,39 @@
         <br>
 
   <!-- Qualificação -->
-        <center><legend>Qualificação</legend></center>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
-          <div class="col-md-5">
-            <select name="VQualificacao" class="form-control">
-              <option value="Sim">Sim</option>
-              <option value="nao">Não</option>
-            </select>
-          </div>
+      <center><legend>Qualificação</legend></center>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="ativo">Se qualificou?</label>
+        <div class="col-md-5">
+          <select name="VQualificacao" class="form-control">
+            <option value="Sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
         </div>
-
+      </div>
 <!--quando se qualificou-->
         <div class="form-group row">
           <label for="conclusao" class="col-md-4 control-label">Data da qualificação:</label>
-          <div class="col-md-5">
-            <input class="form-control" name="dataquali" value="{{row['Qualificacao']}}" type="date"  id="conclusao">
-          </div>
+            <div class="col-md-5">
+              <input class="form-control" name="dataquali" value="{{row['Qualificacao']}}" type="date"  id="conclusao">
+            </div>
         </div>
 
 
 <!--Orientador-->
-        <div class="form-group">
-          <label class="col-md-4 control-label">Orientador:</label>
-          <div class="col-md-5">
-            <input id="orientador" name="orientador" type="text"  value="{{row['Orientador']}}"class="form-control input-md" required="">
-          </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label">Orientador:</label>
+        <div class="col-md-5">
+          <input id="orientador" name="orientador" type="text"  value="{{row['Orientador']}}"class="form-control input-md" required="">
         </div>
-
+      </div>
 <!--Coorientadores-->
-        <div class="form-group">
-          <label class="col-md-4 control-label">Coorientadores:</label>
-          <div class="col-md-5">
-            <input id="coorientadores" name="coorientadores" value="{{row['Corientadores']}}"type="text"  class="form-control input-md" required="">
-          </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label">Coorientadores:</label>
+        <div class="col-md-5">
+          <input id="coorientadores" name="coorientadores" value="{{row['Corientadores']}}"type="text"  class="form-control input-md" required="">
         </div>
+      </div>
 
 <!-- CodDisc-->
         <div class="form-group">
@@ -185,54 +175,54 @@
             <input id="curso" name="coddisc" type="text"   value="{{row['CodDisc']}}"class="form-control input-md" required="">
           </div>
         </div>
-
         <input id="id" name="id" type="hidden" value="{{row['IDGERAL']}}">
 
         <!--Paper-->
-        <center><legend>Paper</legend></center>
+              <center><legend>Paper</legend></center>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Já submeteu um paper?</label>
+                <div class="col-md-5">
+                  <select name="paper" class="form-control">
+                    <option value="Sim">Sim</option>
+                    <option value="nao">Não</option>
+                  </select>
+                </div>
+              </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label">Já submeteu um paper?</label>
-          <div class="col-md-5">
-            <select name="paper" class="form-control">
-              <option value="Sim">Sim</option>
-              <option value="nao">Não</option>
-            </select>
-          </div>
-        </div>
+              <div class="form-group row">
+                <label for="datapub" class="col-md-4 control-label">Data da publicação:</label>
+                <div class="col-md-5">
+                    <input class="form-control" name="datapub" type="date" value="{{paper[0]}}" id="datapub">
+                  </div>
+              </div>
 
-        <div class="form-group row">
-          <label for="datapub" class="col-md-4 control-label">Data da publicação:</label>
-          <div class="col-md-5">
-            <input class="form-control" name="datapub" type="date" value="{{paper[0]}}" id="datapub">
-          </div>
-        </div>
+              <div class="form-group">
+                <label for="ondepub" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
+                <div class="col-md-5">
+                  <input id="ondepub" name="ondepub" type="text" value='{{paper[1]}}' class="form-control input-md">
+                </div>
+              </div>
 
-        <div class="form-group">
-          <label for="ondepub" class="col-md-4 control-label">Conferência/Journal onde foi publicado:</label>
-          <div class="col-md-5">
-            <input id="ondepub" name="ondepub" type="text" value='{{paper[1]}}' class="form-control input-md">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="ativo">O aluno está ativo:</label>
-          <div class="col-md-5">
-            <select name="ativo" class="form-control">
-              {% if row['Ativo'] == 1 %}
-                <option value="1" selected>Sim</option>
-                <option value="0">Não</option>
-              {%endif%}
-              {% if row['Ativo'] == 0 %}
-                <option value="1" >Sim</option>
-                <option value="0" selected>Não</option>
-              {%endif%}
-            </select>
-          </div>
-        </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="ativo">O aluno está ativo:</label>
+                <div class="col-md-5">
+                  <select name="ativo" class="form-control">
+                    {% if row['Ativo'] == 1 %}
+                    <option value="1" selected>Sim</option>
+                    <option value="0">Não</option>
+                    {%endif%}
+                    {% if row['Ativo'] == 0 %}
+                    <option value="1" >Sim</option>
+                    <option value="0" selected>Não</option>
+                    {%endif%}
+                  </select>
+                </div>
+              </div>
 
 
-      {% endfor %}
+
+
+{% endfor %}
       <center>
         <input type="submit"></input>
       </center>

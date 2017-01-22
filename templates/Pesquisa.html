@@ -9,41 +9,45 @@
 {% endblock %}
 {% block body %}
 
-  <nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <img alt="Brand" src="https://s29.postimg.org/6tkc583k7/UFRJ.png" width="180px">
-    </div>
-  </nav>
+
 
     <!--formulario-->
-  <div class="container">
-    <div class="row">
-   		<section align="center">
-      <h3><b><a href="/consulta">Aluno Ativo</a></b></h3>
-      <br>
-      <h3><b><a href="default.asp" target="_blank">Aluno Bolsista</a></b></h3>
-      <br>
-      <br>
+    <div class="container">
+      <div class="row">
+   			  <section align="center">
+            <h3><b><a  class='btn btn-lg btn-primary'href="{{ url_for('ativos') }}">Aluno Ativo</a></b></h3>
 
-      <p>Pesquisa Professor</p>
-      <div id="divBusca">
-        <form class="form-horizontal" action='/pesquisaprof/{value}' method="POST">
-          <input type="text" id="txtBusca" placeholder="Buscar..."/>
-          <input type="submit" class="btn btn-alert"></input>
-        </form>
-      </div>
-      <br>
+            <h3><b><a class='btn btn-lg btn-primary' href="{{ url_for('pesquisabolsa') }}" >Aluno Bolsista</a></b></h3>
 
-      <p>Pesquisa de Aluno</p>
-      <div id="divBusca">
-        <form class="form-horizontal" action='/pesquisaaluno' method="POST">
-          <input type="text" id="txtBusca" name='value' placeholder="Buscar..."/>
-          <input type="submit" class="btn btn-alert"></input>
-        </form>
-      </div>
-      <br>
-      <center><a class="btn btn-default" href="#" role="button">Voltar</a></center>
-    </section>
-   </div>
- </div>
-{% endblock %}
+            <h3><b><a class='btn btn-lg btn-primary' href="{{ url_for('consulta') }}" >Alunos de Mestrado fora atrasado</a></b></h3>
+
+            <h3><b><a class='btn btn-lg btn-primary' href="{{ url_for('consultaDoutorado') }}" >Alunos de Doutorado fora atrasados</a></b></h3>
+
+            <br>
+
+            <p>Pesquisa Professor</p>
+            <div id="divBusca">
+              <form class="form-horizontal" action='/pesquisaprof/{value}' method="POST">
+
+              <input type="text" id="txtBusca" placeholder="Buscar..."/>
+              <input type="submit" class="btn btn-alert"></input>
+            </form>
+
+            </div>
+            <br>
+
+            <p>Pesquisa de Aluno</p>
+            <div id="divBusca">
+              <form class="form-horizontal" action='/pesquisaaluno' method="POST">
+              <input type="text" id="txtBusca" name='value' placeholder="Buscar..."/>
+              <input type="submit" class="btn btn-alert"></input>
+
+            </form>
+
+            </div>
+            <br>
+            <center><a class="btn btn-default" href="#" role="button">Voltar</a></center>
+          </section>
+   	  </div>
+    </div>
+    {% endblock %}

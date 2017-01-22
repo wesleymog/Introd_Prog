@@ -1,56 +1,50 @@
 {% extends "layout.html" %}
 {% block body %}
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <a class="navbar-brand">
-      <img alt="Brand" src="https://s30.postimg.org/3vy7stcdd/sga.png" width="120px">
-      </a>
-    </div>
-  </nav>
 
     <!--formulario-->
-  <div class="container">
-    <div class="row">
-      <div class="span12">
-        <form class="form-horizontal" action='' method="POST">
-          <fieldset>
-            <legend><center>Login</center></legend>
-            <center>
-
-              <!-- Username -->
-              <div class="control-group">
-                <label class="control-label"  for="usuario">Usuário</label>
-                <div class="controls">
-                  <input type="text" id="usuario" name="usuario" placeholder="" class="input-xlarge">
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <form class="form-horizontal" action='' method="POST">
+            <fieldset>
+              <div id="legend">
+                <legend class=""><center>Login</center></legend>
               </div>
-
-              <!-- Password-->
-              <div class="control-group">
-                <label class="control-label" for="senha">Senha</label>
-                <div class="controls">
-                  <input type="password" id="senha" name="senha" placeholder="" class="input-xlarge">
+              <center>
+                <div class="control-group">
+                  <!-- Username -->
+                  <label class="control-label"  for="usuario">Usuário</label>
+                  <div class="controls">
+                    <input type="text" id="usuario" name="usuario" placeholder="" class="input-xlarge">
+                  </div>
                 </div>
-              </div>
 
-              <div class="control-group">
-                <!-- Button -->
-                <br>
-                <div class="controls">
-                  <button class="btn btn-success">Login</button>
-                  <br><br>Esqueceu sua senha? Clique <a href="#">aqui</a>
+                <div class="control-group">
+                  <!-- Password-->
+                  <label class="control-label" for="senha">Senha</label>
+                  <div class="controls">
+                    <input type="password" id="senha" name="senha" placeholder="" class="input-xlarge">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <!-- Button -->
                   <br>
-                  {% if erro %}
+                  <div class="controls">
+                    <button class="btn btn-success">Login</button>
+                    <br><br>Esqueceu sua senha? Clique <a href="#">aqui</a>
+                    <br>
+                    {% if erro %}
                     <div class="alert alert-danger">
                       <strong>ERRO:</strong> {{ erro }}</div>
-                  {% endif %}
-                  <br><br>
+                    {% endif %}<br><br>
+
+                  </div>
                 </div>
-              </div>
-            </center>
-          </fieldset>
-        </form>
+              </center>
+            </fieldset>
+          </form>
+
+        </div>
       </div>
     </div>
-  </div>
 {% endblock %}

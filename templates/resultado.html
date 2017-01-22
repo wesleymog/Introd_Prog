@@ -1,9 +1,10 @@
-{% extends "layout.html" %}
-{% block body %}
-  <div id="container">
-    <div class="alert alert-success">
-      {{ msg }}
+<!doctype html>
+   {% extends "layout.html" %}
+   {% block body %}
+   <div id="container">
+     <div class="alert alert-success">
+       {{ msg }}
+     </div>
     </div>
-  </div>
-  <h2><a href = "{{ url_for('index') }}">Volte para a Home</a></h2>
-{% endblock %}
+      <h2><a href = "{{ url_for('index') }}">Volte para a Home</a></h2>
+   {% endblock %}

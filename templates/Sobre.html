@@ -1,24 +1,40 @@
 {% extends "layout.html" %}
-{% block title %}Sobre Nós{% endblock %}
-{% block head %}
-{% endblock %}
-{% block body %}
-  <div class="container">
-    <div class="row">
-      <legend><center>Sobre</center></legend>
-    </div>
-    <div class="texto" align="center">
-      <h3>Sistema de Gerenciamento Acadêmico</h3>
-      <p> • Cadastro de alunos;</p>
-      <p> • Cadastro de professores;</p>
-      <p> • Gestão de cursos, turmas, salas e horários;</p>
-      <p> • Possibilidade de gerenciar cursos e turmas de diferentes naturezas;</p>
-      <p> • Efetivação de matrículas e transferências;</p>
-      <p> • Criação de turmas com seu respectivo limite de vagas, horário, módulo e professor;</p>
-      <p> • Processo automático de re-matrícula, a cada ano ou semestre;</p>
-    </div>
-    <center>
-      <a class="btn btn-default" href="#" role="button">Voltar</a>
-    </center>
-  </div>
+
+{% block title %}
+Sobre Nós
+ {% endblock %}
+ {% block head %}
+  {% endblock %}
+
+ {% block body %}
+
+   <div class="container">
+       <div class="row">
+              <div id="legend">
+     			      <legend class=""><center>Sobre</center></legend>
+     			    </div>
+              <div class="texto"><div align="center">
+               <h3>Sistema de Gerenciamento Acadêmico</h3>
+               <p> • Cadastro de alunos;</p>
+               <p> • Cadastro de professores;</p>
+               <p> • Gestão de cursos, turmas, salas e horários;</p>
+               <p> • Possibilidade de gerenciar cursos e turmas de diferentes naturezas;</p>
+               <p> • Efetivação de matrículas e transferências;</p>
+               <p> • Criação de turmas com seu respectivo limite de vagas, horário, módulo e professor;</p>
+               <p> • Processo automático de re-matrícula, a cada ano ou semestre;</p>
+              </div>
+            </div>
+              <div>
+              <center><a class="btn btn-default" href="#" role="button">Voltar</a></center>
+              </div>
+              <div id="legend">
+     			      <legend class=""><center></center></legend>
+     			    </div>
+             </div>
+
+   		</div>
+   	</div>
+   </div>
+
+
 {% endblock %}

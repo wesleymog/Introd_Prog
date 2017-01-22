@@ -1,26 +1,28 @@
 {% extends "layout.html" %}
-{% block head %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{% endblock %}
-{% block body %}
-  <form class="form-horizontal" action = "{{ url_for('formProfessores') }}" method = "POST">
-    <fieldset>
+
+    <meta charset="UTF-8" />
+  {% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% endblock %}
+  {% block body %}
+    <form class="form-horizontal" action = "{{ url_for('formProfessores') }}" method = "POST">
+      <fieldset>
 
 <!-- Dados do professor -->
       <center><legend>Cadastro do Professor</legend></center>
 
 <!-- Nome-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="nome">Nome:</label>
-        <div class="col-md-5">
-          <input id="nome" name="nome" type="text"  class="form-control input-md" required="">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nome">Nome:</label>
+          <div class="col-md-5">
+            <input id="nome" name="nome" type="text"  class="form-control input-md" required="">
+          </div>
         </div>
-      </div>
 
 <!-- Endereço (Rua)-->
-      <div class="form-group">
+        <div class="form-group">
           <label class="col-md-4 control-label" for="endereco">Endereço:</label>
           <div class="col-md-5">
             <input id="endereco" name="endereco" type="text" placeholder="Ex: Rua São João, 123" class="form-control input-md" required="">
@@ -28,19 +30,19 @@
         </div>
 
 <!--Bairro-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="bairro">Bairro:</label>
-        <div class="col-md-5">
-          <input id="bairro" name="bairro" type="text"  class="form-control input-md" required="">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="bairro">Bairro:</label>
+          <div class="col-md-5">
+            <input id="bairro" name="bairro" type="text"  class="form-control input-md" required="">
+          </div>
         </div>
-      </div>
 
 <!--Cidade-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="cidade">Cidade:</label>
-        <div class="col-md-5">
-          <input id="cidade" name="cidade" type="text"  class="form-control input-md" required="">
-        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="cidade">Cidade:</label>
+          <div class="col-md-5">
+            <input id="cidade" name="cidade" type="text"  class="form-control input-md" required="">
+          </div>
         </div>
 
 <!-- Telefone-->
@@ -68,7 +70,7 @@
         </div>
 
 <!-- Tipo de Professor -->
-        <div class="form-group">
+      <div class="form-group">
           <label class="col-md-4 control-label" for="tipoprof">Tipo de professor:</label>
           <div class="col-md-5">
             <select name="tipoprof" id="tipoprof" class="form-control" required>
@@ -87,11 +89,11 @@
           <div class="col-md-5">
             <input id="dre" name="dre" type="number"  class="form-control input-md" required>
           </div>
-        </div>
 
-        <center>
-          <input type="submit"></input>
-        </center>
+        </div>
+      <center>
+        <input class='btn btn-primary'type="submit"></input>
+      </center>
     </fieldset>
   </form>
 {% endblock %}

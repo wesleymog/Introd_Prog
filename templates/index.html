@@ -1,50 +1,32 @@
-{% extends "layout.html" %}
-{% block title %}Sistema de Gerenciamento Acadêmico | UFRJ{% endblock %}
-{% block head %}
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
-  <link rel="icon" type="image/gif" href="static/Imagens/minervacinza.png"/>
-{% endblock %}
+    {% extends "layout.html" %}
+    {% block title %}Sistema de Gerenciamento Acadêmico | UFRJ{% endblock %}
+    {% block head %}
 
-{% block body %}
-  <div id="topo">
-    <div class="navbar-header"><img src="https://s29.postimg.org/6tkc583k7/UFRJ.png" width="180px"/>
-      <div id="busca">
-        <input type="text" id="txtBusca" placeholder="Buscar..."/>
-              <!-- <img src="static/search3.png" id="btnBusca" alt="Pesquisa"/> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
+    <link rel="icon" type="image/gif" href="static/Imagens/minervacinza.png"/>
+    {% endblock %}
+
+    {% block body %}
+        
+
+    <div id="banner">
+      <!-- <img src="static/Imagens/UFRJ.jpg"/> -->
+
+    </div>
+
+    <div id="container">
+      <div class="chamada">
+        <h1>Período letivo 2017.1</h1>
+        <img src="static/Imagens/calendarioacademico.jpg"/>
+        <p>Calendário acadêmico</p>
+        <p>• Período letivo: 6 de março à 8 de julho de 2017</p>
+        <p>• Informações sobre o período letivo 2017.1 (...</p>
+      </div>
+      <div class="chamada">
+        <h1>Ajuda</h1>
+        <img src="static/Imagens/question.jpg"/>
+        <p>Dúvidas frequentes</p>
       </div>
     </div>
-  </div>
-
-  <div id="banner">
-    <!-- <img src="static/Imagens/UFRJ.jpg"/> -->
-
-  </div>
-
-  <div id="menu">
-    <ul>
-      <li><a href="./">Início</a></li>
-      <li><a href="{{url_for('sobre')}}">Sobre</a></li>
-      <li><a href="{{url_for('registro')}}">Cadastre Alunos</a></li>
-      <li><a href="{{url_for('lista')}}">Lista de Alunos</a></li>
-      <li><a href="{{url_for('registroProf')}}">Cadastre Professores</a></li>
-      <li><a href="{{url_for('listaProf')}}">Lista de Professores</a></li>
-    <ul>
-  </div>
-
-  <div id="container">
-    <div class="chamada">
-      <h1>Período letivo 2017.1</h1>
-      <img src="static/Imagens/calendarioacademico.jpg"/>
-      <p>Calendário acadêmico</p>
-      <p>• Período letivo: 6 de março à 8 de julho de 2017</p>
-      <p>• Informações sobre o período letivo 2017.1 (...</p>
-    </div>
-
-    <div class="chamada">
-      <h1>Ajuda</h1>
-      <img src="static/Imagens/question.jpg"/>
-      <p>Dúvidas frequentes</p>
-    </div>
-  </div>
-{% endblock %}
+    {% endblock %}
