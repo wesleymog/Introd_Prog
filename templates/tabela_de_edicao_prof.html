@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block head %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+
+  <title>Lista</title>
+
+  <style>
+    .bg-4 {
+    background-color: #2f2f2f;
+    color: #ffffff;
+    }
+    .container-fluid {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    }
+    .navbar {
+    height: 70px;
+    }
+
+    /*table {
+    font: 1.5em tahoma;
+    border:1px solid #dadada;
+    width:50%;margin:auto;
+    border:1px solid #dadada;
+    }
+    table thead tr {
+    text-align:left;
+    background:#fff;
+    }
+    table thead th {
+    background:gray;
+    }
+    table tbody tr {
+    cursor: pointer;
+    background:#eee;
+    }
+
+
+    table, td, th {
+    border: 2px solid black;
+
+    }
+    td {
+    height: px;
+    text-align: center;
+    }
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    TH {background-color:black;
+    color:#FFD700;
+    style='text-align:center
+    }
+    .cinza {background-color:#C0C0C0;}
+    a {color:#FFD700;}
+    table {background-color:#FFFAF0}*/
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+{% endblock %}
+{% block body %}
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <a class="navbar-brand">
+        <img alt="Brand" src="https://s30.postimg.org/3vy7stcdd/sga.png" width="120px">
+      </a>
+    </div>
+  </nav>
+  <!--formulario-->
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <form class="form-horizontal" action='' method="POST">
+          <fieldset>
+            <a href="{{url_for('registroProf')}}"><h4>Incluir registro</h4></a>
+            <div class="table-responsive">
+              <table class="table">
+                <TR>
+                  <TH>Codigo</TH>
+                  <TH>Nome</TH>
+                  <TH>Email </TH>
+                  <TH>Telefone </TH>
+
+                  <TH>SIAPE</TH>
+                  <TH>Tipo</TH>
+                  <TH>CodOrientados</TH>
+                  <TH>Editar?</TH>
+                  <TH>Deletar?</TH>
+                </TR>
+                {% for row in rows %}
+                  <TR class="cinza">
+                    <TD>{{row['id']}}</TD>
+                    <TD>{{row['nome']}}</TD>
+                    <TD>{{row['email']}}</TD>
+                    <TD>{{row['tel']}}</TD>
+
+                    <TD>{{row['SIAPE']}}</TD>
+                    <TD>{{row['Tipo']}}</TD>
+                    <TD>
+                      {% if not row['CodOrientados'] %}
+                        Nenhum
+                      {% else %}
+                        {{row['CodOrientados']}}
+                      {% endif %}
+                    </TD>
+                    <TD><a href="/editProf/{{row['IDGERAL']}}">Editar</a></TD>
+                    <TD><a href="/deletar/{{row['IDGERAL']}}">Deletar</a></TD>
+                  </TR>
+                {% endfor %}
+              </table>
+            </div>
+            <br><br><br>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- </center> -->
+  </div>
+  <!-- </div>
+  </div> -->
+{% endblock %}

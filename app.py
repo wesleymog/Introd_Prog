@@ -74,6 +74,16 @@ def lista():
    rows = cur.fetchall();
    return render_template("tabela_de_edicao.html", rows=rows)
 
+@app.route("/listaprof")
+def listaProf():
+   conn = sqlite3.connect('Sistema.db')
+   conn.row_factory = sqlite3.Row
+   cur = conn.cursor()
+   cur.execute("Select * from Professor, InfoBasica where Professor.IDGERAL=InfoBasica.id;")
+
+   rows = cur.fetchall();
+   return render_template("tabela_de_edicao_prof.html", rows=rows)
+
 @app.route('/formAlunos',methods = ['POST', 'GET'])
 def formAlunos():
    msg='Há algo de errado, tente novamente'
@@ -224,6 +234,7 @@ def delete(nid):
         conn = sqlite3.connect('Sistema.db')
         cursor = conn.cursor()
         cursor.execute("""DELETE FROM Aluno WHERE IDGERAL=?;""",(nid, ) )
+        cursor.execute("""DELETE FROM Professor WHERE IDGERAL=?;""",(nid, ) )
         cursor.execute("""DELETE FROM InfoBasica WHERE id=?;""",(nid, ) )
         conn.commit()
         msg='Deletado com sucesso!'
@@ -240,7 +251,7 @@ def editar(nid):
     conn = sqlite3.connect('Sistema.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=? and InfoBasica.id=?;""",(nid, nid) )
+    cursor.execute("""Select * from InfoBasica,Aluno where Aluno.IDGERAL=? and InfoBasica.id=?;""",(nid, nid) )
     rows = cursor.fetchall();
     print rows
     for row in rows:
@@ -268,6 +279,17 @@ def editar(nid):
         ingressofinal=''
 
     return render_template("editarAluno.html",rows=rows,ingresso=ingresso, nid=nid,bolsa=bolsa, mestrado=mestrado, paper=paper)
+
+@app.route("/editProf/<nid>")
+def editProf(nid):
+    print nid
+    conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Professor where Professor.IDGERAL=? and InfoBasica.id=?;""",(nid, nid) )
+    rows = cursor.fetchall();
+
+    return render_template("editarProf.html",row=rows[0])
 
 @app.route('/editAlunos',methods = ['POST', 'GET'])
 def EditAlunos():
@@ -338,6 +360,38 @@ def EditAlunos():
       finally:
          return render_template("resultado.html",msg = msg)
          con.close()
+
+@app.route('/sendEditProf',methods = ['POST'])
+def sendEditProf():
+   msg=''
+   if request.method == 'POST':
+      try:
+         nome = request.form['nome']
+         tel = request.form['telefone']
+         endereco=request.form['endereco']
+         email=request.form['email']
+         siape=request.form['siape']
+         tipo=request.form['tipoprof']
+         codOrientados=request.form['dre']
+         nid=request.form['id']
+
+         print nome, tel, endereco, email, siape, tipo, codOrientados
+
+         conn = sqlite3.connect('Sistema.db')
+         cursor = conn.cursor()
+         cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
+         cursor.execute("UPDATE Professor SET SIAPE=?, Tipo=?, CodOrientados=? WHERE IDGERAL=? ;",(siape,tipo,codOrientados,nid) )
+         conn.commit()
+
+         conn.close()
+         msg = "Editado com sucesso!"
+      except:
+         con.rollback()
+         msg="Tem algo de errado!"
+      finally:
+         return render_template("resultado.html",msg = msg)
+         con.close()
+
 @app.route('/pesquisa')
 def pesquisa():
     return render_template('Pesquisa.html')

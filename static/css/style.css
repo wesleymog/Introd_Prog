@@ -60,6 +60,10 @@ div#menu a:hover{
   color:#1aa3ff;
 }
 
+#menu ul {
+  list-style-type: none;
+}
+
 div#banner{
   background:#F5F5F5;
   width:1330px;

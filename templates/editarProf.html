@@ -1,0 +1,93 @@
+  {% extends "layout.html" %}
+  {% block title%}Edição de Aluno{% endblock %}
+
+  {% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  {% endblock %}
+  {% block body %}
+    <form class="form-horizontal" action = "{{ url_for('sendEditProf') }}" method = "POST">
+      <fieldset>
+
+<!-- Dados do aluno -->
+      <center><legend>Registro do Professor</legend></center>
+      <input id="id" name="id" type="hidden" value="{{row['IDGERAL']}}">
+<!-- Nome-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nome">Nome:</label>
+          <div class="col-md-5">
+            <input id="nome" name="nome" type="text"  value="{{row['nome']}}"class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Endereço-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="dre">Endereço:</label>
+          <div class="col-md-5">
+            <input id="endereco" name="endereco" type="text" placeholder="Ex: Rua São João, 123" class="form-control input-md" required="" value="{{row['endereco']}}">
+          </div>
+        </div>
+
+<!-- Telefone-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="telefone">Telefone:</label>
+          <div class="col-md-5">
+            <input id="telefone" name="telefone" value="{{row['tel']}}"type="text" placeholder="(21)xxxx - xxxx" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- Email-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="email">Email:</label>
+          <div class="col-md-5">
+            <input id="email" name="email" type="text"  value="{{row['email']}}" class="form-control input-md" required="">
+          </div>
+        </div>
+
+<!-- SIAPE-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="endereco">Endereço:</label>
+          <div class="col-md-5">
+            <input id="siape" name="siape" type="text"  class="form-control input-md" required="" value="{{row['SIAPE']}}">
+          </div>
+        </div>
+
+        <!-- Tipo de Professor -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="tipoprof">Tipo de professor:</label>
+            <div class="col-md-5">
+              <select name="tipoprof" id="tipoprof" class="form-control" required>
+                {% if row['Tipo']=='Aspirante' %}
+                  <option value="Aspirante" selected>Aspirante</option>
+                  <option value="Permanente">Permanente</option>
+                  <option value="Permanente-Doutorado">Permanente-Doutorado</option>
+                {% elif row['Tipo']=='Permanente' %}
+                  <option value="Aspirante">Aspirante</option>
+                  <option value="Permanente" selected>Permanente</option>
+                  <option value="Permanente-Doutorado">Permanente-Doutorado</option>
+                {% elif row['Tipo']=='Permanente-Doutorado' %}
+                  <option value="Aspirante">Aspirante</option>
+                  <option value="Permanente">Permanente</option>
+                  <option value="Permanente-Doutorado" selected>Permanente-Doutorado</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <!-- Código dos Orientados -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="dre">DRE dos Orientados:</label>
+            <div class="col-md-5">
+              <input id="dre" name="dre" type="number"  class="form-control input-md" value="{{row['CodOrientados']}}" required>
+            </div>
+          </div>
+      <center>
+        <input type="submit"></input>
+      </center>
+    </fieldset>
+  </form>
+{% endblock %}
