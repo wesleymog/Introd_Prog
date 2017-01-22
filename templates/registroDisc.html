@@ -1,44 +1,12 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style type="text/css">
-#menu1{
-	height:40px;
-}
-#menu1 div ul{
-	list-style-type:none;
-	margin-left:26%;
-}
-#menu1 div ul li{
-	float:left;
-	margin:0 0 0 50px;
-	font-size:18px;
-}
-#menu1 div ul li a{
-	text-decoration:none;
-	color:rgba(50,50,50,1);
-	transition:0.5;
-}
-#menu1 div ul li a:hover{
-	color:rgba(0,0,0,1);
-	transition:0.5s;
-}
-.quad1{
-	height:40px;
-}
-#linha{
-	border-top:solid 1px rgba(50,50,50,1);
-	height:55px;
-	margin-right:70px;
-	margin-left:70px;
-}
-</style>
-  </head>
-  <body>
+{% extends "layout.html" %}
+{% block title %}Registro de Disciplina{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
     <form class="form-horizontal" action = "{{ url_for('cadastroDisc') }}" method = "POST">
-    <-- Dados da disciplina -->
       <center><legend>Registro da Disciplina</legend></center>
 
 <!-- CodDisc-->
@@ -66,12 +34,16 @@
         </div>
 
 <!-- DiscBasica-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="discbasica">Básica:</label>
-          <div class="col-md-5">
-            <input id="basicadisc" name="basicadisc" type="text" placeholder="Sim ou não." class="form-control input-md" required="">
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="ativo">É básica?</label>
+              <div class="col-md-5">
+                <select name="basicadisc" class="form-control">
+                  <option value="1">Sim</option>
+                  <option value="0">Não</option>
+                </select>
+              </div>
+            </div>
+
 
 
       <center>
@@ -79,5 +51,4 @@
       </center>
     </fieldset>
   </form>
-</body>
-</html>
+  {% endblock %}

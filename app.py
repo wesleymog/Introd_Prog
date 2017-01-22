@@ -8,14 +8,14 @@ from types import *
 app = Flask(__name__)
 msg=''
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     erro = None
     if request.method == 'POST':
         if request.form['usuario'] != 'admin' or request.form['senha'] != 'admin':
             erro = 'Sai daqui satanas.'
         else:
-            return redirect(url_for('registro'))
+            return redirect(url_for('index'))
     return render_template('login.html', erro=erro)
 
 @app.route("/registro")
@@ -454,7 +454,7 @@ def cadastroDisc():
               return render_template("resultado.html",msg = msg)
 
     return render_template("resultado.html")
-@app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
 

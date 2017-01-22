@@ -1,32 +1,15 @@
     {% extends "layout.html" %}
+    {% block title %}Sistema de Gerenciamento Acadêmico | UFRJ{% endblock %}
     {% block head %}
-    <title>Sistema de Gerenciamento Acadêmico | UFRJ</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
     <link rel="icon" type="image/gif" href="static/Imagens/minervacinza.png"/>
     {% endblock %}
 
     {% block body %}
-    <div id="topo">
-        <div class="navbar-header"><img src="https://s29.postimg.org/6tkc583k7/UFRJ.png" width="180px"/>
-          <div id="sobrenos">
-            <div id="busca">
-              <input type="text" id="txtBusca" placeholder="Buscar..."/>
-              <!-- <img src="static/search3.png" id="btnBusca" alt="Pesquisa"/> -->
-            </div>
-          </div>
-        </div>
-    </div>
-    <div id="menu">
-      <ul>
-        <li><a href="./">Início</a></li>
-        <li><a href="{{url_for('sobre')}}">Sobre</a></li>
-        <li><a href="{{url_for('registro')}}">Cadastre Alunos</a></li>
-        <li><a href="{{url_for('lista')}}">Lista de Alunos</a></li>
-        <li><a href="{{url_for('registroProf')}}">Cadastre Professores</a></li>
-        <li><a href="{{url_for('listaProf')}}">Lista de Professores</a></li>
-      <ul>
-    </div>
+        
+
     <div id="banner">
       <!-- <img src="static/Imagens/UFRJ.jpg"/> -->
 
