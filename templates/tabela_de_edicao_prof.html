@@ -3,6 +3,56 @@
 {% block head %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
+  <script src="/static/jspdf.js"></script>
+  <script src="/static/FileSaver.js"></script>
+  <script src="/static/jspdf.plugin.table.js"></script>
+  <script>
+  function generatefromjson() {
+      var data = [], fontSize = 12, height = 0, doc;
+      doc = new jsPDF('p', 'pt', 'a4', true);
+      doc.setFont("times", "normal");
+      doc.setFontSize(fontSize);
+      data = doc.tableToJson('tableProf');
+
+      data.forEach(function(item,index){
+        delete item['Editar?'];
+        delete item['Deletar?'];
+        delete item['SIAPE'];
+        delete item['Tipo'];
+        delete item['CodOrientados'];
+      });
+
+      height = doc.drawTable(data, {
+        xstart : 10,
+        ystart : 10,
+        tablestart : 40,
+        marginright : 100,
+        xOffset : 10,
+        yOffset : 10,
+        columnWidths : [50,210,210,100]
+      });
+      if (height >= doc.internal.pageSize.height) doc.addPage();
+
+      data = doc.tableToJson('tableProf');
+
+      data.forEach(function(item,index){
+        delete item['Editar?'];
+        delete item['Deletar?'];
+        delete item['Codigo'];
+        delete item['Nome'];
+        delete item['Email'];
+        delete item['Telefone'];
+      });
+
+      height = doc.drawTable(data, {
+        tablestart : height,
+        columnWidths : [155,260,155]
+      });
+      if (height >= doc.internal.pageSize.height) doc.addPage();
+
+      doc.save("some-file.pdf");
+    };
+  </script>
 {% endblock %}
 {% block body %}
 
@@ -13,13 +63,14 @@
         <form class="form-horizontal" action='' method="POST">
           <fieldset>
             <a href="{{url_for('registroProf')}}"><h4>Incluir registro</h4></a>
+            <a href="#" onclick="generatefromjson();"><h4>Gerar PDF</h4></a>
             <div class="table-responsive">
-              <table class="table">
+              <table id="tableProf" class="table">
                 <TR>
                   <TH>Codigo</TH>
                   <TH>Nome</TH>
-                  <TH>Email </TH>
-                  <TH>Telefone </TH>
+                  <TH>Email</TH>
+                  <TH>Telefone</TH>
 
                   <TH>SIAPE</TH>
                   <TH>Tipo</TH>
