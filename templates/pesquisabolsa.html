@@ -2,12 +2,39 @@
 {% block title%}Pesquisa{% endblock %}
 
 {% block head %}
+<script src="/static/jspdf.js"></script>
+<script src="/static/FileSaver.js"></script>
+<script src="/static/jspdf.plugin.table.js"></script>
+<script>
+function generatefromjson() {
+    var data = [], fontSize = 12, height = 0, doc;
+    doc = new jsPDF('p', 'pt', 'a4', true);
+    doc.setFont("times", "normal");
+    doc.setFontSize(fontSize);
+    data = doc.tableToJson('table');
+
+    height = doc.drawTable(data, {
+      xstart : 10,
+      ystart : 10,
+      tablestart : 40,
+      marginright : 100,
+      xOffset : 10,
+      yOffset : 10,
+      columnWidths : [570]
+    });
+
+    if (height >= doc.internal.pageSize.height) doc.addPage();
+
+    doc.save("some-file.pdf");
+  };
+</script>
 {% endblock %}
 {% block body %}
 {%for i in nomes%}
 <div class="container">
   <center><legend>Lista de Alunos Bolsista</legend></center>
-  <table class="table">
+  <a href="#" onclick="generatefromjson();"><h4>Gerar PDF</h4></a>
+  <table id="table" class="table">
     <thead>
       <tr>
         <th>Nome</th>

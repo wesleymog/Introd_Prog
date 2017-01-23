@@ -36,6 +36,7 @@ def consulta():
     data=lista[0]+lista[1]+lista[2]
     print data
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+20000)>? and Aluno.curso='mestrado' ;""",(data,) )
     rows = cursor.fetchall();
@@ -46,6 +47,7 @@ def consulta():
 @app.route('/ativos')
 def ativos():
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and Ativo=1;""" )
     rows = cursor.fetchall();
@@ -57,6 +59,7 @@ def consultaDoutorado():
     data=lista[0]+lista[1]+lista[2]
     print data
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""Select * from InfoBasica,Aluno  where Aluno.IDGERAL=InfoBasica.id and (Aluno.ingresso+30000)<? and Aluno.curso='doutorado' ;""",(data,) )
     rows = cursor.fetchall();
@@ -148,11 +151,10 @@ def formAlunos():
          datafinal=data[0]+data[1]+data[2]
 
          conn = sqlite3.connect('Sistema.db')
+         conn.row_factory = sqlite3.Row
          cursor = conn.cursor()
 
          cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
-
-         conn.row_factory = sqlite3.Row
 
          cursor.execute("Select Max(id) from InfoBasica")
 
@@ -198,6 +200,7 @@ def formProfessores():
          endereco=endereco+", "+bairro+", "+cidade
 
          conn = sqlite3.connect('Sistema.db')
+         conn.row_factory = sqlite3.Row
          cursor = conn.cursor()
 
          cursor.execute("INSERT INTO InfoBasica (nome, endereco, tel, email) VALUES (?,?,?,?)",(nome,endereco,tel,email) )
@@ -232,6 +235,7 @@ def delete(nid):
     print nid
     try:
         conn = sqlite3.connect('Sistema.db')
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
         cursor.execute("""DELETE FROM Aluno WHERE IDGERAL=?;""",(nid, ) )
         cursor.execute("""DELETE FROM Professor WHERE IDGERAL=?;""",(nid, ) )
@@ -343,6 +347,7 @@ def EditAlunos():
          data=ingresso.split("-")
          datafinal=data[0]+data[1]+data[2]
          conn = sqlite3.connect('Sistema.db')
+         conn.row_factory = sqlite3.Row
          cursor = conn.cursor()
          cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
          cursor.execute("""UPDATE Aluno SET DRE=?, DataGrad=?,
@@ -378,6 +383,7 @@ def sendEditProf():
          print nome, tel, endereco, email, siape, tipo, codOrientados
 
          conn = sqlite3.connect('Sistema.db')
+         conn.row_factory = sqlite3.Row
          cursor = conn.cursor()
          cursor.execute("UPDATE InfoBasica SET nome=?,endereco=?,tel=?, email=? WHERE id=? ;",(nome,endereco,tel,email,nid) )
          cursor.execute("UPDATE Professor SET SIAPE=?, Tipo=?, CodOrientados=? WHERE IDGERAL=? ;",(siape,tipo,codOrientados,nid) )
@@ -399,13 +405,25 @@ def pesquisa():
 def pesquisaaluno():
     valor=request.form['value']
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("""Select * from InfoBasica,Aluno  where InfoBasica.nome=? or Aluno.DRE=? ;""",(valor,valor) )
+    cursor.execute("Select * from InfoBasica,Aluno where instr(InfoBasica.nome,?)>0 or Aluno.DRE=? ;",(valor,valor) )
     rows = cursor.fetchall();
+    print rows[0]
     return render_template("Consulta.html",rows=rows)
+@app.route('/pesquisaprof',methods = ['POST', 'GET'])
+def pesquisaprof():
+    valor=request.form['value']
+    conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""Select * from InfoBasica,Professor where InfoBasica.nome=? or Professor.SIAPE=? ;""",(valor,valor) )
+    rows = cursor.fetchall();
+    return render_template("ConsultaProf.html",rows=rows)
 @app.route('/pesquisabolsa',methods = ['POST', 'GET'])
 def pesquisabolsa():
     conn = sqlite3.connect('Sistema.db')
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""Select Aluno.Bolsa,InfoBasica.nome from InfoBasica,Aluno  where InfoBasica.id=Aluno.IDGERAL ;""" )
     rows = cursor.fetchall();
@@ -438,6 +456,7 @@ def cadastroDisc():
            periododisc=request.form['periododisc']
            basicadisc=request.form['basicadisc']
            conn = sqlite3.connect('Sistema.db')
+           conn.row_factory = sqlite3.Row
            cursor = conn.cursor()
 
            cursor.execute("INSERT INTO Disciplina (CodDisc, Nome, Periodo, Basica) VALUES (?,?,?,?)",(CodDisc,nomedisc,periododisc,basicadisc) )

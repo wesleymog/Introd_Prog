@@ -20,8 +20,8 @@
       data = doc.tableToJson('tableAtivos');
 //Codigo Nome Email Telefone DRE Curso DataGrad LocalGrad Mestrado Orientador Corientadores Ingresso Qualificacao CodDisc Bolsa Ativo Paper
       data.forEach(function(item,index){
-        delete item['Editar?'];
         delete item['Deletar?'];
+        // delete item['DRE'];
         delete item['Curso'];
         delete item['DataGrad'];
         delete item['LocalGrad'];
@@ -43,20 +43,18 @@
         marginright : 100,
         xOffset : 10,
         yOffset : 10,
-        columnWidths : [50,210,210,100]
+        columnWidths : [220,150,100,100]
       });
       if (height >= doc.internal.pageSize.height) doc.addPage();
 
       data = doc.tableToJson('tableAtivos');
 
       data.forEach(function(item,index){
-        delete item['Editar?'];
         delete item['Deletar?'];
-        delete item['Codigo'];
         delete item['Nome'];
         delete item['Email'];
         delete item['Telefone'];
-        delete item['Mestrado'];
+        delete item['DRE'];
         delete item['Orientador'];
         delete item['Corientadores'];
         delete item['Ingresso'];
@@ -76,9 +74,7 @@
       data = doc.tableToJson('tableAtivos');
 
       data.forEach(function(item,index){
-        delete item['Editar?'];
         delete item['Deletar?'];
-        delete item['Codigo'];
         delete item['Nome'];
         delete item['Email'];
         delete item['Telefone'];
@@ -102,12 +98,11 @@
       data = doc.tableToJson('tableAtivos');
 
       data.forEach(function(item,index){
-        delete item['Editar?'];
         delete item['Deletar?'];
-        delete item['Codigo'];
         delete item['Nome'];
         delete item['Email'];
         delete item['Telefone'];
+        delete item['DRE'];
         delete item['Curso'];
         delete item['DataGrad'];
         delete item['LocalGrad'];
@@ -142,9 +137,9 @@
 <div class="table-responsive">
 <table id='tableAtivos' class="table">
 <TR>
-  <TH>Nome</TH>
-<TH>Email </TH>
-<TH>Telefone </TH>
+<TH>Nome</TH>
+<TH>Email</TH>
+<TH>Telefone</TH>
 <TH>DRE</TH>
 <TH>Curso</TH>
 <TH>DataGrad</TH>
@@ -165,7 +160,7 @@
 
 
 
-<TD> {{row[1]}}</TD>
+<TD>{{row[1]}}</TD>
 <TD>{{row[4]}}</TD>
 <TD>{{row[3]}}</TD>
 <TD>{{row[6]}}</TD>
